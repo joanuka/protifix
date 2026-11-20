@@ -1,0 +1,136 @@
+name,protein_g,fat_g,cost_per_portion_ngn,chewiness_score,umami_score,prep_time_mins,familiarity_score,availability_abuja,cooking_difficulty,best_cooking_method,co2_kg_per_portion,category,portion_basis,allergens,price_confidence,ingredient_basis
+TSP (Soya Chunk) Suya Strips,15.6,4.3,210,8,7,15,8,High,Easy,"Skewered, rubbed with yaji and grilled hot, 3 to 4 minutes a side",0.1,Soy,100 g cooked,soy,Low,30g Textured soy protein (dry)
+TSP (Soya Chunk) Shawarma Strips,15.6,5.3,240,8,6,20,7,High,Easy,"Sliced thin, seasoned and seared hard, then wrapped with sauce and cabbage",0.1,Soy,100 g cooked,soy,Low,30g Textured soy protein (dry)
+TSP (Soya Chunk) Pepper Soup Chunks,15.6,0.3,190,7,6,25,8,High,Easy,"Simmered in pepper-soup broth, added for the last 10 to 15 minutes",0.1,Soy,100 g cooked,soy,Low,30g Textured soy protein (dry)
+TSP (Soya Chunk) Stew Pieces,15.6,6.3,220,7,6,25,8,High,Easy,"Simmered in the stew base, added for the last 10 to 15 minutes",0.1,Soy,100 g cooked,soy,Low,30g Textured soy protein (dry)
+TSP (Soya Chunk) Asun-Style Peppered Bites,15.6,5.3,220,8,7,20,7,High,Easy,"Peppered with ata rodo and scotch bonnet, then pan-roasted until charred",0.1,Soy,100 g cooked,soy,Low,30g Textured soy protein (dry)
+TSP (Soya Chunk) Crispy Bites,15.6,10.3,240,7,6,25,8,High,Medium,"Coated in seasoned flour or crumbs, then shallow-fried until golden",0.1,Soy,100 g cooked,soy,Low,30g Textured soy protein (dry)
+TSP (Soya Chunk) Jollof Rice Topper,15.6,4.3,190,7,6,20,7,High,Easy,"Seared on its own with curry and thyme, then laid on the jollof rice",0.1,Soy,100 g cooked,soy,Low,30g Textured soy protein (dry)
+Tofu (Awara) Suya Strips,10.5,9.6,460,6,6,15,10,High,Easy,"Skewered, rubbed with yaji and grilled hot, 3 to 4 minutes a side",0.37,Soy,100 g cooked,soy,Low,105g Tofu / awara
+Tofu (Awara) Shawarma Strips,10.5,10.6,490,6,5,20,9,High,Easy,"Sliced thin, seasoned and seared hard, then wrapped with sauce and cabbage",0.37,Soy,100 g cooked,soy,Low,105g Tofu / awara
+Tofu (Awara) Pepper Soup Chunks,10.5,5.6,440,5,5,25,10,High,Easy,"Simmered in pepper-soup broth, added for the last 10 to 15 minutes",0.37,Soy,100 g cooked,soy,Low,105g Tofu / awara
+Tofu (Awara) Stew Pieces,10.5,11.6,470,5,5,25,10,High,Easy,"Simmered in the stew base, added for the last 10 to 15 minutes",0.37,Soy,100 g cooked,soy,Low,105g Tofu / awara
+Tofu (Awara) Asun-Style Peppered Bites,10.5,10.6,460,6,6,20,9,High,Easy,"Peppered with ata rodo and scotch bonnet, then pan-roasted until charred",0.37,Soy,100 g cooked,soy,Low,105g Tofu / awara
+Tofu (Awara) Crispy Bites,10.5,15.6,480,5,5,25,10,High,Medium,"Coated in seasoned flour or crumbs, then shallow-fried until golden",0.37,Soy,100 g cooked,soy,Low,105g Tofu / awara
+Tofu (Awara) Jollof Rice Topper,10.5,9.6,440,5,5,20,9,High,Easy,"Seared on its own with curry and thyme, then laid on the jollof rice",0.37,Soy,100 g cooked,soy,Low,105g Tofu / awara
+Tempeh Suya Strips,18.1,14.4,1040,8,9,25,4,Low,Easy,"Skewered, rubbed with yaji and grilled hot, 3 to 4 minutes a side",0.22,Soy,100 g cooked,soy,Low,95g Tempeh
+Tempeh Shawarma Strips,18.1,15.4,1070,8,8,30,3,Low,Easy,"Sliced thin, seasoned and seared hard, then wrapped with sauce and cabbage",0.22,Soy,100 g cooked,soy,Low,95g Tempeh
+Tempeh Pepper Soup Chunks,18.1,10.4,1020,7,8,35,4,Low,Easy,"Simmered in pepper-soup broth, added for the last 10 to 15 minutes",0.22,Soy,100 g cooked,soy,Low,95g Tempeh
+Tempeh Stew Pieces,18.1,16.4,1060,7,8,35,4,Low,Easy,"Simmered in the stew base, added for the last 10 to 15 minutes",0.22,Soy,100 g cooked,soy,Low,95g Tempeh
+Tempeh Asun-Style Peppered Bites,18.1,15.4,1050,8,9,30,3,Low,Easy,"Peppered with ata rodo and scotch bonnet, then pan-roasted until charred",0.22,Soy,100 g cooked,soy,Low,95g Tempeh
+Tempeh Crispy Bites,18.1,20.4,1060,7,8,35,4,Low,Medium,"Coated in seasoned flour or crumbs, then shallow-fried until golden",0.22,Soy,100 g cooked,soy,Low,95g Tempeh
+Tempeh Jollof Rice Topper,18.1,14.4,1020,7,8,30,3,Low,Easy,"Seared on its own with curry and thyme, then laid on the jollof rice",0.22,Soy,100 g cooked,soy,Low,95g Tempeh
+Seitan Suya Strips,25.0,5.8,690,9,8,25,6,Medium,Medium,"Skewered, rubbed with yaji and grilled hot, 3 to 4 minutes a side",0.48,Wheat gluten,100 g cooked,gluten,Low,100g Seitan (wheat gluten)
+Seitan Shawarma Strips,25.0,6.8,720,9,7,30,5,Medium,Medium,"Sliced thin, seasoned and seared hard, then wrapped with sauce and cabbage",0.48,Wheat gluten,100 g cooked,gluten,Low,100g Seitan (wheat gluten)
+Seitan Pepper Soup Chunks,25.0,1.8,670,8,7,35,6,Medium,Medium,"Simmered in pepper-soup broth, added for the last 10 to 15 minutes",0.48,Wheat gluten,100 g cooked,gluten,Low,100g Seitan (wheat gluten)
+Seitan Stew Pieces,25.0,7.8,700,8,7,35,6,Medium,Medium,"Simmered in the stew base, added for the last 10 to 15 minutes",0.48,Wheat gluten,100 g cooked,gluten,Low,100g Seitan (wheat gluten)
+Seitan Asun-Style Peppered Bites,25.0,6.8,700,9,8,30,5,Medium,Medium,"Peppered with ata rodo and scotch bonnet, then pan-roasted until charred",0.48,Wheat gluten,100 g cooked,gluten,Low,100g Seitan (wheat gluten)
+Seitan Crispy Bites,25.0,11.8,720,8,7,35,6,Medium,Hard,"Coated in seasoned flour or crumbs, then shallow-fried until golden",0.48,Wheat gluten,100 g cooked,gluten,Low,100g Seitan (wheat gluten)
+Seitan Jollof Rice Topper,25.0,5.8,670,8,7,30,5,Medium,Medium,"Seared on its own with curry and thyme, then laid on the jollof rice",0.48,Wheat gluten,100 g cooked,gluten,Low,100g Seitan (wheat gluten)
+Oyster Mushroom Suya Strips,5.0,4.6,690,7,10,15,9,High,Easy,"Skewered, rubbed with yaji and grilled hot, 3 to 4 minutes a side",0.26,Fungi,100 g cooked,none,Low,150g Oyster mushroom (fresh)
+Oyster Mushroom Shawarma Strips,5.0,5.6,720,7,9,20,8,High,Easy,"Sliced thin, seasoned and seared hard, then wrapped with sauce and cabbage",0.26,Fungi,100 g cooked,none,Low,150g Oyster mushroom (fresh)
+Oyster Mushroom Pepper Soup Chunks,5.0,0.6,670,6,9,25,9,High,Easy,"Simmered in pepper-soup broth, added for the last 10 to 15 minutes",0.26,Fungi,100 g cooked,none,Low,150g Oyster mushroom (fresh)
+Oyster Mushroom Stew Pieces,5.0,6.6,700,6,9,25,9,High,Easy,"Simmered in the stew base, added for the last 10 to 15 minutes",0.26,Fungi,100 g cooked,none,Low,150g Oyster mushroom (fresh)
+Oyster Mushroom Asun-Style Peppered Bites,5.0,5.6,700,7,10,20,8,High,Easy,"Peppered with ata rodo and scotch bonnet, then pan-roasted until charred",0.26,Fungi,100 g cooked,none,Low,150g Oyster mushroom (fresh)
+Oyster Mushroom Crispy Bites,5.0,10.6,720,6,9,25,9,High,Medium,"Coated in seasoned flour or crumbs, then shallow-fried until golden",0.26,Fungi,100 g cooked,none,Low,150g Oyster mushroom (fresh)
+Oyster Mushroom Jollof Rice Topper,5.0,4.6,670,6,9,20,8,High,Easy,"Seared on its own with curry and thyme, then laid on the jollof rice",0.26,Fungi,100 g cooked,none,Low,150g Oyster mushroom (fresh)
+Cowpea-Paste Suya Strips,9.4,4.5,150,4,8,30,10,High,Medium,"Skewered, rubbed with yaji and grilled hot, 3 to 4 minutes a side",0.1,Legume,100 g cooked,none,Medium,40g Cowpea (dry)
+Cowpea-Paste Shawarma Strips,9.4,5.5,190,4,7,35,10,High,Medium,"Sliced thin, seasoned and seared hard, then wrapped with sauce and cabbage",0.1,Legume,100 g cooked,none,Medium,40g Cowpea (dry)
+Cowpea-Paste Pepper Soup Chunks,9.4,0.5,130,3,7,40,10,High,Medium,"Simmered in pepper-soup broth, added for the last 10 to 15 minutes",0.1,Legume,100 g cooked,none,Medium,40g Cowpea (dry)
+Cowpea-Paste Stew Pieces,9.4,6.5,170,3,7,40,10,High,Medium,"Simmered in the stew base, added for the last 10 to 15 minutes",0.1,Legume,100 g cooked,none,Medium,40g Cowpea (dry)
+Cowpea-Paste Asun-Style Peppered Bites,9.4,5.5,160,4,8,35,10,High,Medium,"Peppered with ata rodo and scotch bonnet, then pan-roasted until charred",0.1,Legume,100 g cooked,none,Medium,40g Cowpea (dry)
+Cowpea-Paste Crispy Bites,9.4,10.5,180,3,7,40,10,High,Hard,"Coated in seasoned flour or crumbs, then shallow-fried until golden",0.1,Legume,100 g cooked,none,Medium,40g Cowpea (dry)
+Cowpea-Paste Jollof Rice Topper,9.4,4.5,130,3,7,35,10,High,Medium,"Seared on its own with curry and thyme, then laid on the jollof rice",0.1,Legume,100 g cooked,none,Medium,40g Cowpea (dry)
+Bambara-Paste Suya Strips,8.0,6.4,190,5,7,30,9,High,Medium,"Skewered, rubbed with yaji and grilled hot, 3 to 4 minutes a side",0.1,Legume,100 g cooked,none,Low,40g Bambara groundnut (dry)
+Bambara-Paste Shawarma Strips,8.0,7.4,220,5,6,35,8,High,Medium,"Sliced thin, seasoned and seared hard, then wrapped with sauce and cabbage",0.1,Legume,100 g cooked,none,Low,40g Bambara groundnut (dry)
+Bambara-Paste Pepper Soup Chunks,8.0,2.4,170,4,6,40,9,High,Medium,"Simmered in pepper-soup broth, added for the last 10 to 15 minutes",0.1,Legume,100 g cooked,none,Low,40g Bambara groundnut (dry)
+Bambara-Paste Stew Pieces,8.0,8.4,200,4,6,40,9,High,Medium,"Simmered in the stew base, added for the last 10 to 15 minutes",0.1,Legume,100 g cooked,none,Low,40g Bambara groundnut (dry)
+Bambara-Paste Asun-Style Peppered Bites,8.0,7.4,190,5,7,35,8,High,Medium,"Peppered with ata rodo and scotch bonnet, then pan-roasted until charred",0.1,Legume,100 g cooked,none,Low,40g Bambara groundnut (dry)
+Bambara-Paste Crispy Bites,8.0,12.4,210,4,6,40,9,High,Hard,"Coated in seasoned flour or crumbs, then shallow-fried until golden",0.1,Legume,100 g cooked,none,Low,40g Bambara groundnut (dry)
+Bambara-Paste Jollof Rice Topper,8.0,6.4,170,4,6,35,8,High,Medium,"Seared on its own with curry and thyme, then laid on the jollof rice",0.1,Legume,100 g cooked,none,Low,40g Bambara groundnut (dry)
+Soy-Cowpea Suya Strips,10.6,7.1,140,5,8,30,9,High,Medium,"Skewered, rubbed with yaji and grilled hot, 3 to 4 minutes a side",0.09,Blend,100 g cooked,soy,Medium,15g Soybean (dry); 22g Cowpea (dry)
+Soy-Cowpea Shawarma Strips,10.6,8.1,170,5,7,35,8,High,Medium,"Sliced thin, seasoned and seared hard, then wrapped with sauce and cabbage",0.09,Blend,100 g cooked,soy,Medium,15g Soybean (dry); 22g Cowpea (dry)
+Soy-Cowpea Pepper Soup Chunks,10.6,3.1,120,4,7,40,9,High,Medium,"Simmered in pepper-soup broth, added for the last 10 to 15 minutes",0.09,Blend,100 g cooked,soy,Medium,15g Soybean (dry); 22g Cowpea (dry)
+Soy-Cowpea Stew Pieces,10.6,9.1,160,4,7,40,9,High,Medium,"Simmered in the stew base, added for the last 10 to 15 minutes",0.09,Blend,100 g cooked,soy,Medium,15g Soybean (dry); 22g Cowpea (dry)
+Soy-Cowpea Asun-Style Peppered Bites,10.6,8.1,150,5,8,35,8,High,Medium,"Peppered with ata rodo and scotch bonnet, then pan-roasted until charred",0.09,Blend,100 g cooked,soy,Medium,15g Soybean (dry); 22g Cowpea (dry)
+Soy-Cowpea Crispy Bites,10.6,13.1,170,4,7,40,9,High,Hard,"Coated in seasoned flour or crumbs, then shallow-fried until golden",0.09,Blend,100 g cooked,soy,Medium,15g Soybean (dry); 22g Cowpea (dry)
+Soy-Cowpea Jollof Rice Topper,10.6,7.1,120,4,7,35,8,High,Medium,"Seared on its own with curry and thyme, then laid on the jollof rice",0.09,Blend,100 g cooked,soy,Medium,15g Soybean (dry); 22g Cowpea (dry)
+Young Jackfruit Suya Strips,3.4,4.7,330,9,4,30,6,Low,Hard,"Skewered, rubbed with yaji and grilled hot, 3 to 4 minutes a side",0.13,Fruit/veg,100 g cooked,none,Low,120g Young jackfruit
+Young Jackfruit Shawarma Strips,3.4,5.7,360,9,3,35,5,Low,Hard,"Sliced thin, seasoned and seared hard, then wrapped with sauce and cabbage",0.13,Fruit/veg,100 g cooked,none,Low,120g Young jackfruit
+Young Jackfruit Pepper Soup Chunks,3.4,0.7,310,8,3,40,6,Low,Hard,"Simmered in pepper-soup broth, added for the last 10 to 15 minutes",0.13,Fruit/veg,100 g cooked,none,Low,120g Young jackfruit
+Young Jackfruit Stew Pieces,3.4,6.7,340,8,3,40,6,Low,Hard,"Simmered in the stew base, added for the last 10 to 15 minutes",0.13,Fruit/veg,100 g cooked,none,Low,120g Young jackfruit
+Young Jackfruit Asun-Style Peppered Bites,3.4,5.7,340,9,4,35,5,Low,Hard,"Peppered with ata rodo and scotch bonnet, then pan-roasted until charred",0.13,Fruit/veg,100 g cooked,none,Low,120g Young jackfruit
+Young Jackfruit Crispy Bites,3.4,10.7,360,8,3,40,6,Low,Hard,"Coated in seasoned flour or crumbs, then shallow-fried until golden",0.13,Fruit/veg,100 g cooked,none,Low,120g Young jackfruit
+Young Jackfruit Jollof Rice Topper,3.4,4.7,310,8,3,35,5,Low,Hard,"Seared on its own with curry and thyme, then laid on the jollof rice",0.13,Fruit/veg,100 g cooked,none,Low,120g Young jackfruit
+Boiled Brown Beans (Ewa Oloyin),10.1,0.6,110,3,6,45,10,High,Easy,"Boiled soft with onion and pepper, topped with stew",0.11,Legume,100 g cooked,none,Medium,43g Cowpea (dry)
+Ewa Agoyin (Mashed Beans),9.4,8.5,150,2,8,50,10,High,Medium,"Boiled very soft and mashed, served with fried agoyin pepper sauce",0.1,Legume,100 g cooked,none,Medium,40g Cowpea (dry)
+Ekuru (Steamed White Bean Cake),8.9,0.5,110,3,5,60,9,High,Medium,Peeled beans ground and steamed in leaf or foil,0.1,Legume,100 g cooked,none,Medium,38g Cowpea (dry)
+Gbegiri (Bean Soup),7.0,5.4,110,1,7,50,9,High,Medium,"Boiled beans blended smooth, simmered with palm oil",0.08,Legume,100 g cooked,none,Medium,30g Cowpea (dry)
+Adalu (Beans and Sweet Corn),8.7,5.3,140,3,6,50,9,High,Easy,"Beans and corn boiled together, finished with palm oil and pepper",0.1,Legume,100 g cooked,none,Medium,28g Cowpea (dry); 24g Maize (dry)
+Moi Moi (Steamed Bean Pudding),8.9,6.5,140,3,7,60,10,High,Medium,"Steamed in leaf or foil with pepper, onion and a little oil",0.1,Legume,100 g cooked,none,Medium,38g Cowpea (dry)
+Moi Moi (Cowpea-Bambara Blend),8.3,7.3,150,3,7,60,8,High,Medium,"Steamed in leaf or foil, half cowpea and half bambara",0.1,Blend,100 g cooked,none,Low,20g Cowpea (dry); 18g Bambara groundnut (dry)
+Okpa (Steamed Bambara Pudding),7.6,10.3,170,3,6,60,8,High,Medium,Bambara flour mixed with palm oil and steamed in leaf,0.1,Legume,100 g cooked,none,Low,38g Bambara groundnut (dry)
+Boiled Bambara Nuts,9.0,2.7,150,5,4,60,8,High,Easy,"Boiled until tender, lightly salted",0.11,Legume,100 g cooked,none,Low,45g Bambara groundnut (dry)
+Bambara Groundnut Cakes (Roasted),7.6,8.3,180,6,7,30,9,High,Medium,Steamed or roasted with a pepper crust,0.1,Legume,100 g cooked,none,Low,38g Bambara groundnut (dry)
+Cowpea (Beans) Fritters (Akara),8.9,12.5,150,4,7,25,10,High,Easy,Whipped bean batter deep-fried in hot oil,0.1,Legume,100 g cooked,none,Medium,38g Cowpea (dry)
+Pigeon Pea (Fio-fio) Boiled,9.4,0.7,120,4,5,50,6,Medium,Easy,"Boiled until soft, seasoned with onion and pepper",0.11,Legume,100 g cooked,none,Low,45g Pigeon pea (dry)
+Pigeon Pea Patties,8.0,8.6,150,5,6,30,5,Medium,Medium,"Coarsely mashed, shaped and pan-fried",0.1,Legume,100 g cooked,none,Low,38g Pigeon pea (dry)
+African Yam Bean (Otili) Boiled,11.3,1.5,140,5,5,70,5,Medium,Medium,Boiled long and slow until tender,0.11,Legume,100 g cooked,none,Low,42g African yam bean (dry)
+African Yam Bean Moi Moi,9.7,7.3,160,3,7,70,5,Medium,Medium,Steamed in leaf or foil,0.09,Legume,100 g cooked,none,Low,36g African yam bean (dry)
+Lima Bean (Butter Bean) Stew,8.8,6.6,160,4,6,60,6,Medium,Medium,Boiled then simmered in stew base,0.1,Legume,100 g cooked,none,Low,40g Lima bean (dry)
+Lima Bean Patties,8.4,8.6,160,5,6,35,5,Medium,Medium,"Boiled, mashed and pan-fried as patties",0.1,Legume,100 g cooked,none,Low,38g Lima bean (dry)
+Chickpea Falafel Balls,7.2,16.3,230,5,6,30,6,Medium,Medium,Deep-fried or baked herb-spiced balls,0.1,Legume,100 g cooked,none,Low,38g Chickpea (dry)
+Chickpea Shawarma-Style Strips,7.4,8.2,240,6,6,30,6,Medium,Medium,Seasoned strips seared hard for wraps,0.1,Legume,100 g cooked,gluten,Low,36g Chickpea (dry); 6g Wheat flour
+Boiled Chickpeas,8.0,2.5,170,4,4,60,6,Medium,Easy,"Boiled until soft, seasoned",0.11,Legume,100 g cooked,none,Low,42g Chickpea (dry)
+Lentil Patties,8.0,8.3,180,5,6,25,4,Low,Medium,Pan-fried or baked patties,0.09,Legume,100 g cooked,none,Low,32g Lentil (dry)
+Lentil Mince Stew Topper,8.2,5.3,200,4,6,30,4,Low,Medium,"Simmered in thick stew, like a mince",0.09,Legume,100 g cooked,none,Low,33g Lentil (dry)
+Boiled Whole Soybeans,15.1,8.0,90,4,5,90,6,High,Medium,Soaked overnight then boiled until tender,0.09,Soy,100 g cooked,soy,Medium,42g Soybean (dry)
+Soybean Fritters (Soy Akara),13.0,18.8,130,4,7,30,6,High,Medium,"Soaked, ground and deep-fried like akara",0.08,Soy,100 g cooked,soy,Medium,36g Soybean (dry)
+Soy-Cowpea Moi Moi,10.6,9.1,130,3,7,60,8,High,Medium,Steamed in leaf or foil,0.09,Blend,100 g cooked,soy,Medium,15g Soybean (dry); 22g Cowpea (dry)
+Soy-Cowpea Burger Patty,10.7,11.2,160,5,7,30,7,High,Medium,Shaped and pan-fried with onion and thyme,0.1,Blend,100 g cooked,gluten/soy,Medium,15g Soybean (dry); 20g Cowpea (dry); 6g Wheat flour
+Fried Awara (Hausa Tofu),10.0,13.3,440,6,6,20,9,High,Easy,"Pressed tofu cubes fried until golden, rolled in yaji",0.35,Soy,100 g cooked,soy,Low,100g Tofu / awara
+Tofu Scramble (Pepper and Onion),9.0,10.8,390,3,6,15,6,High,Easy,"Crumbled and fried with pepper, onion and turmeric",0.32,Soy,100 g cooked,soy,Low,90g Tofu / awara
+Smoked Tofu (Peppery Rub),14.0,11.5,600,8,8,20,7,Medium,Easy,Sliced and grilled with a peppery rub,0.35,Soy,100 g cooked,soy,Low,100g Smoked tofu
+Sesame-Crusted Tofu,10.3,14.5,410,6,6,20,5,High,Easy,Pressed tofu rolled in sesame and pan-seared,0.32,Soy,100 g cooked,sesame/soy,Low,85g Tofu / awara; 8g Sesame (beniseed)
+Kuli-kuli-Crusted Tofu,12.0,11.0,410,6,6,20,8,High,Easy,Pressed tofu coated in crushed kuli-kuli and seared,0.33,Soy,100 g cooked,peanut/soy,Low,85g Tofu / awara; 10g Kuli-kuli
+Dawadawa Spiced Soy Skewers,11.0,10.0,390,7,10,20,7,High,Easy,Skewered and grilled with an iru-yaji rub,0.27,Soy,100 g cooked,peanut/soy,Low,70g Tofu / awara; 8g Iru / dawadawa; 4g Kuli-kuli
+Soya-Dodo (Soy Gizdodo Style),13.9,8.4,240,7,6,25,7,High,Medium,Rehydrated soya diced and fried in pepper sauce with plantain,0.12,Soy,100 g cooked,soy,Low,26g Textured soy protein (dry); 30g Unripe plantain
+Soya Kofta (Spiced Mince),12.2,6.3,210,6,6,25,5,High,Medium,"Rehydrated mince bound with flour, shaped and grilled",0.1,Soy,100 g cooked,gluten/soy,Low,22g Textured soy protein (dry); 8g Wheat flour
+Soy-Mushroom Blend Strips,9.8,5.4,400,8,8,20,6,High,Easy,"Half-rehydrated soya with seared mushroom, grilled in strips",0.16,Blend,100 g cooked,soy,Low,15g Textured soy protein (dry); 60g Oyster mushroom (fresh)
+Moringa-TSP Strips,14.6,4.3,230,8,6,20,5,High,Easy,"Rehydrated soya strips with moringa powder, seared",0.1,Soy,100 g cooked,soy,Low,26g Textured soy protein (dry); 4g Moringa leaf powder
+Oyster Mushroom and Cowpea Burger,7.2,8.5,340,6,8,30,6,High,Medium,"Seared mushroom folded into cowpea paste, pan-fried as patties",0.15,Blend,100 g cooked,gluten,Low,50g Oyster mushroom (fresh); 22g Cowpea (dry); 4g Wheat flour
+Pulled Oyster Mushroom (Roasted),5.3,6.6,740,9,9,25,6,High,Medium,Hand-shredded and roasted dry for wraps,0.27,Fungi,100 g cooked,none,Low,160g Oyster mushroom (fresh)
+Dried Oyster Mushroom (Peppered),3.1,6.3,380,7,9,25,4,Medium,Medium,"Soaked, squeezed dry and fried in pepper sauce",0.05,Fungi,100 g cooked,none,Low,14g Oyster mushroom (dried)
+Button Mushroom in Pepper Sauce,4.7,8.4,850,6,7,15,7,High,Easy,Sliced and pan-seared in pepper sauce,0.26,Fungi,100 g cooked,none,Low,150g Button mushroom
+Shiitake Slices (Pan-Seared),3.3,6.8,1900,7,10,15,3,Low,Easy,Sliced and seared hard in a hot pan,0.33,Fungi,100 g cooked,none,Low,150g Shiitake (fresh)
+King Oyster Mushroom Strips,5.3,6.6,1540,8,8,15,3,Low,Easy,"Scored, seared and glazed with pepper sauce",0.35,Fungi,100 g cooked,none,Low,160g King oyster mushroom
+Mushroom and Tofu Suya Cubes,7.3,6.9,540,7,8,20,7,High,Easy,Skewered mixed cubes grilled with yaji,0.3,Blend,100 g cooked,soy,Low,70g Oyster mushroom (fresh); 50g Tofu / awara
+Mushroom Egusi Balls,9.4,17.4,410,6,8,30,7,High,Medium,"Seared mushroom folded into egusi paste, fried as balls",0.18,Blend,100 g cooked,none,Low,60g Oyster mushroom (fresh); 18g Egusi (melon seed); 10g Cowpea (dry)
+Mushroom and Groundnut Yaji Crumble,9.0,13.6,430,6,8,20,7,High,Easy,Mushroom roasted and tossed in groundnut yaji crumble,0.19,Blend,100 g cooked,peanut,Low,70g Oyster mushroom (fresh); 15g Groundnut (shelled); 8g Kuli-kuli
+Melon Seed (Egusi) Balls,11.2,28.0,230,7,8,25,10,High,Easy,Simmered in spicy broth or pan-seared,0.13,Seeds/nuts,100 g cooked,none,Low,40g Egusi (melon seed)
+Egusi-Cowpea Patties,10.8,16.3,190,6,8,30,9,High,Medium,Mixed paste shaped and pan-fried,0.12,Blend,100 g cooked,none,Low,20g Egusi (melon seed); 22g Cowpea (dry)
+Egusi and Soya Pepper-Soup Dumplings,13.4,10.2,200,6,8,30,7,High,Medium,Mixed dumplings simmered in pepper-soup broth,0.12,Blend,100 g cooked,soy,Low,20g Egusi (melon seed); 15g Textured soy protein (dry)
+Boiled Groundnuts,11.7,22.1,140,5,4,60,10,High,Easy,Boiled in salted water until soft,0.14,Seeds/nuts,100 g cooked,peanut,Low,45g Groundnut (shelled)
+Groundnut Yaji Chunks,12.5,23.1,180,6,7,15,8,High,Easy,Coated in yaji and roasted,0.15,Seeds/nuts,100 g cooked,peanut,Low,40g Groundnut (shelled); 6g Kuli-kuli
+Groundnut-Cowpea Kofta,9.2,14.2,160,5,7,30,8,High,Medium,Shaped and pan-fried,0.11,Blend,100 g cooked,peanut,Low,12g Groundnut (shelled); 26g Cowpea (dry)
+Kuli-kuli Crumble (Coating),10.5,7.5,110,6,6,5,10,High,Easy,Crushed as coating or filling,0.1,Seeds/nuts,100 g cooked,peanut,Low,30g Kuli-kuli
+Kuli-kuli Bean Burger,9.8,9.3,160,5,7,30,9,High,Medium,Mixed patty pan-fried,0.1,Blend,100 g cooked,peanut,Low,12g Kuli-kuli; 24g Cowpea (dry)
+African Walnut (Ukpa) Boiled,13.2,30.0,370,5,5,90,6,Medium,Easy,Boiled until the kernels soften,0.06,Seeds/nuts,100 g cooked,tree nut,Low,60g African walnut (ukpa)
+Pumpkin Seed (Ugu Seed) Patties,12.4,20.0,240,5,7,30,5,Medium,Medium,"Ground seed and bean patties, pan-fried",0.11,Blend,100 g cooked,gluten,Low,28g Pumpkin (ugu) seed; 15g Cowpea (dry); 5g Wheat flour
+Pumpkin Seed Suya Crumble,11.9,16.2,230,6,7,15,5,Medium,Easy,"Toasted seed with yaji, served as a crumble",0.1,Seeds/nuts,100 g cooked,peanut,Low,28g Pumpkin (ugu) seed; 10g Kuli-kuli
+Sesame-Chickpea Kofta,7.2,13.4,190,5,7,30,5,Medium,Medium,Shaped and pan-fried,0.1,Blend,100 g cooked,sesame,Low,12g Sesame (beniseed); 24g Chickpea (dry)
+Sunflower-Cowpea Burger,8.8,14.0,190,5,6,30,5,Low,Medium,Shaped and pan-fried,0.1,Blend,100 g cooked,none,Low,15g Sunflower seed; 24g Cowpea (dry)
+Cashew and Tofu Pepper Pieces,9.7,15.3,450,6,6,20,5,Medium,Easy,Pan-tossed in pepper sauce,0.26,Blend,100 g cooked,soy/tree nut,Low,15g Cashew nut; 70g Tofu / awara
+Tiger Nut and Soy Patties,8.2,14.6,130,5,5,30,6,High,Medium,Mixed patties pan-fried,0.07,Blend,100 g cooked,soy,Low,20g Tiger nut; 20g Soybean (dry)
+Ukwa (African Breadfruit) Pepper-Tossed,7.7,10.8,230,6,7,40,7,Medium,Hard,Boiled then pan-tossed with pepper,0.07,Seeds/nuts,100 g cooked,none,Low,45g Ukwa (breadfruit seed)
+Ukwa and Cowpea Mix,8.9,8.5,190,5,7,45,7,Medium,Medium,"Boiled together, finished with palm oil and pepper",0.09,Blend,100 g cooked,none,Low,25g Ukwa (breadfruit seed); 20g Cowpea (dry)
+Ugba (Oil Bean Slices),6.8,14.8,300,5,8,35,5,Medium,Medium,Tossed warm with spices and palm oil,0.07,Seeds/nuts,100 g cooked,none,Low,40g Ugba (oil bean)
+Ugba and Bean Salad,7.6,8.6,210,5,8,40,5,Medium,Medium,Warm salad of ugba and boiled beans,0.08,Blend,100 g cooked,none,Low,20g Ugba (oil bean); 18g Cowpea (dry)
+Jackfruit and Cowpea Burger,6.5,8.6,230,7,6,35,5,Low,Medium,"Shredded jackfruit folded into cowpea paste, pan-fried",0.11,Blend,100 g cooked,gluten,Low,45g Young jackfruit; 20g Cowpea (dry); 5g Wheat flour
+Boiled Jackfruit Seeds,4.0,0.2,80,6,3,40,5,Medium,Easy,"Boiled until soft, lightly salted",0.08,Fruit/veg,100 g cooked,none,Low,60g Jackfruit seed (boiled)
+Banana Blossom Fish-Style Fillets,2.6,12.6,250,7,4,30,3,Low,Medium,Battered and fried like fish pieces,0.09,Fruit/veg,100 g cooked,gluten,Low,70g Banana blossom; 15g Wheat flour
+Plantain and Bean Patties,5.6,8.4,140,5,5,25,8,High,Medium,Pan-fried patties,0.09,Blend,100 g cooked,none,Medium,30g Unripe plantain; 22g Cowpea (dry)
+Moringa and Bean Patties,9.8,8.6,170,5,6,25,6,High,Medium,Pan-fried patties,0.1,Blend,100 g cooked,none,Medium,5g Moringa leaf powder; 36g Cowpea (dry)
+Moringa Akara,9.5,12.5,170,4,7,25,8,High,Easy,"Bean batter with moringa powder, deep-fried",0.1,Legume,100 g cooked,none,Medium,36g Cowpea (dry); 4g Moringa leaf powder
+Spirulina-Boosted Bean Patties,9.7,8.7,230,5,6,25,3,High,Medium,Pan-fried patties with spirulina powder,0.09,Blend,100 g cooked,none,Medium,34g Cowpea (dry); 3g Spirulina powder
+Tiger Nut Patties,2.5,14.5,140,5,4,20,6,High,Medium,Pan-seared patties,0.06,Seeds/nuts,100 g cooked,gluten,Low,35g Tiger nut; 8g Wheat flour

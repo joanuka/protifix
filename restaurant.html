@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mama Tolu Kitchen | Nigerian restaurant, Abuja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--red:#b3261e;--gold:#e8a317;--char:#171717;--ink:#222;--mut:#6b6b6b;--bg:#fff;--soft:#f5f2ee;--leaf:#1f4d36}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+h1,h2,h3,.btn,.logo,.tab{font-family:Oswald,"Arial Narrow",Impact,sans-serif;text-transform:uppercase;letter-spacing:.03em}
+a{color:inherit}.wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+.top{background:var(--char);color:#ddd;font-size:.82rem;text-align:center;padding:7px 12px}
+nav{position:sticky;top:0;z-index:10;background:#fff;box-shadow:0 1px 0 #e6e6e6}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-size:1.6rem;font-weight:700;text-decoration:none;color:var(--red)}.logo b{color:var(--char);font-weight:700}
+nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;align-items:center}
+nav ul a{text-decoration:none;font-weight:600;font-size:.92rem}nav ul a:hover{color:var(--red)}
+.btn{display:inline-block;background:var(--red);color:#fff;text-decoration:none;padding:12px 26px;font-weight:600;font-size:1rem;border:0;border-radius:3px;cursor:pointer}
+.btn:hover{background:#8f1d17}.btn.gold{background:var(--gold);color:#171717}.btn.gold:hover{background:#fff}
+.btn.line{background:transparent;border:2px solid #fff}.btn.line:hover{background:#fff;color:#171717}
+.leafbtn{background:var(--leaf)!important;color:#fff!important;padding:9px 16px;border-radius:3px}
+.hero{position:relative;min-height:560px;display:flex;align-items:center;color:#fff;background:#2b1d14 url(/images/hero.jpg) center/cover}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.25))}
+.hero .wrap{position:relative}.hero h1{font-size:clamp(2.6rem,7vw,5rem);line-height:1.02;margin:0;max-width:11em}
+.hero p{max-width:34em;font-size:1.1rem;margin:18px 0 28px;color:#eee}.hero .btn{margin:0 10px 10px 0}
+.facts{background:var(--char);color:#fff}.facts .wrap{display:grid;grid-template-columns:repeat(3,1fr)}
+.facts div{padding:20px 14px;text-align:center;border-right:1px solid #333;font-size:.92rem}.facts div:last-child{border:0}
+.facts strong{display:block;font-family:Oswald,sans-serif;font-size:1.15rem;letter-spacing:.04em;color:var(--gold);text-transform:uppercase}
+section{padding:68px 0}.head{text-align:center;margin-bottom:28px}.head h2{font-size:2.4rem;margin:0}.head p{color:var(--mut);margin:6px 0 0}
+.tabs{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+.tab{background:none;border:0;border-bottom:3px solid transparent;padding:8px 16px;font-size:1.05rem;cursor:pointer;color:var(--mut)}
+.tab.on,.tab:hover{color:var(--red);border-color:var(--red)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:26px}
+.card{background:#fff;display:flex;flex-direction:column}.card.hide{display:none}
+.ph{position:relative;aspect-ratio:4/3;background:#2a2522;overflow:hidden;border-radius:3px}
+.ph::after{content:attr(data-name);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:#8d8279;font-family:Oswald,sans-serif;text-transform:uppercase;letter-spacing:.06em}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;transition:transform .4s}.card:hover img{transform:scale(1.04)}
+.card h3{font-size:1.2rem;margin:14px 0 2px}.card p{margin:0 0 12px;font-size:.9rem;color:var(--mut);flex:1}
+.row{display:flex;align-items:center;justify-content:space-between}.price{font-family:Oswald,sans-serif;font-size:1.25rem;font-weight:600;color:var(--red)}
+.add{font-weight:600;font-size:.85rem;text-decoration:none;border:2px solid var(--char);padding:5px 14px;border-radius:3px}.add:hover{background:var(--char);color:#fff}
+.plant{background:var(--leaf);color:#fff;padding:0}.plant .wrap{padding:0;max-width:none;display:grid;grid-template-columns:1fr 1fr}
+.plant .pic{min-height:420px;background:#163a29 url(/images/plant-based.jpg) center/cover}
+.plant .txt{padding:64px max(22px,6vw);align-self:center;max-width:620px}
+.plant h2{font-size:2.5rem;margin:0 0 14px;line-height:1.05}.plant p{color:#d7e6dc;margin:0 0 24px}
+.plant ul{padding:0;margin:0 0 26px;list-style:none}.plant li{padding:7px 0;border-bottom:1px solid rgba(255,255,255,.15)}
+.about{background:var(--soft)}.about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.about h2{font-size:2.3rem;margin:0 0 14px}.about p{color:#444;margin:0 0 12px}
+.about .ph{aspect-ratio:5/4;background:#3a2f27}
+.reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+blockquote{margin:0;padding:22px;border:1px solid #e6e6e6;border-top:4px solid var(--gold)}blockquote p{margin:0 0 12px}blockquote cite{font-style:normal;font-weight:600;font-size:.88rem}
+.visit{background:var(--char);color:#ddd}.visit .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:30px}
+.visit h3{color:#fff;font-size:1.2rem;margin:0 0 8px}.visit p{margin:0;color:#bbb}
+footer{background:#0e0e0e;color:#888;padding:20px 0;font-size:.84rem;text-align:center}footer a{color:#bbb}
+a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media(max-width:800px){nav ul li:not(:last-child){display:none}.plant .wrap,.about .wrap{grid-template-columns:1fr}.plant .pic{min-height:260px}.facts .wrap{grid-template-columns:1fr}.facts div{border:0;border-bottom:1px solid #333}.hero{min-height:480px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ph img{transition:none}}
+</style></head><body>
+<div class="top">Open daily 11am to 9pm &nbsp;|&nbsp; Call to order: +234 000 000 0000</div>
+<nav><div class="wrap"><a class="logo" href="/">Mama Tolu <b>Kitchen</b></a>
+<ul><li><a href="#menu">Menu</a></li><li><a href="#about">Our story</a></li><li><a href="#visit">Find us</a></li><li><a class="leafbtn" href="/plant-based">Plant-based menu</a></li></ul></div></nav>
+
+<header class="hero"><div class="wrap"><h1>Real Nigerian food, made fresh daily</h1>
+<p>Smoky jollof, rich egusi, pepper soup and charcoal suya. Dine in, take away or order ahead.</p>
+<a class="btn" href="#menu">View menu</a><a class="btn line" href="/plant-based">Try plant-based</a></div></header>
+<div class="facts"><div class="wrap"><div><strong>Fresh daily</strong>Cooked in small batches</div><div><strong>Dine in or take away</strong>Order at the counter or by phone</div><div><strong>Plant-based options</strong>Meat-free swaps for our favourites</div></div></div>
+
+<section id="menu"><div class="wrap"><div class="head"><h2>Our menu</h2><p>Sample prices in naira. Edit them to match yours.</p></div>
+<div class="tabs"><button class="tab on" data-c="all">All</button><button class="tab" data-c="rice">Rice</button><button class="tab" data-c="soup">Soups and swallow</button><button class="tab" data-c="grill">Grill</button><button class="tab" data-c="sides">Sides</button></div>
+<div class="grid">
+<article class="card" data-c="rice"><div class="ph" data-name="Jollof rice"><img src="/images/jollof.jpg" alt="Jollof rice with grilled chicken" onerror="this.remove()"></div><h3>Jollof rice and chicken</h3><p>Smoky party-style jollof with grilled chicken and plantain.</p><div class="row"><span class="price">₦4,500</span><a class="add" href="tel:+2340000000000">Order</a></div></article>
+<article class="card" data-c="rice"><div class="ph" data-name="Fried rice"><img src="/images/fried-rice.jpg" alt="Fried rice with turkey" onerror="this.remove()"></div><h3>Fried rice and turkey</h3><p>Mixed vegetables and tender turkey, served with coleslaw.</p><div class="row"><span class="price">₦5,000</span><a class="add" href="tel:+2340000000000">Order</a></div></article>
+<article class="card" data-c="soup"><div class="ph" data-name="Pounded yam and egusi"><img src="/images/egusi.jpg" alt="Pounded yam and egusi soup" onerror="this.remove()"></div><h3>Pounded yam and egusi</h3><p>Melon-seed soup with assorted meat and stockfish.</p><div class="row"><span class="price">₦5,500</span><a class="add" href="tel:+2340000000000">Order</a></div></article>
+<article class="card" data-c="soup"><div class="ph" data-name="Amala and ewedu"><img src="/images/amala.jpg" alt="Amala with ewedu and gbegiri" onerror="this.remove()"></div><h3>Amala, ewedu and gbegiri</h3><p>The Ibadan classic with goat meat.</p><div class="row"><span class="price">₦4,800</span><a class="add" href="tel:+2340000000000">Order</a></div></article>
+<article class="card" data-c="soup"><div class="ph" data-name="Efo riro"><img src="/images/efo-riro.jpg" alt="Efo riro" onerror="this.remove()"></div><h3>Efo riro</h3><p>Spinach stew with assorted meat, served with eba or rice.</p><div class="row"><span class="price">₦4,800</span><a class="add" href="tel:+2340000000000">Order</a></div></article>
+<article class="card" data-c="soup"><div class="ph" data-name="Pepper soup"><img src="/images/pepper-soup.jpg" alt="Goat meat pepper soup" onerror="this.remove()"></div><h3>Goat meat pepper soup</h3><p>Hot, peppery and full of spice.</p><div class="row"><span class="price">₦4,000</span><a class="add" href="tel:+2340000000000">Order</a></div></article>
+<article class="card" data-c="grill"><div class="ph" data-name="Beef suya"><img src="/images/suya.jpg" alt="Beef suya" onerror="this.remove()"></div><h3>Beef suya</h3><p>Charcoal grilled with yaji, onions and tomato.</p><div class="row"><span class="price">₦3,500</span><a class="add" href="tel:+2340000000000">Order</a></div></article>
+<article class="card" data-c="grill"><div class="ph" data-name="Grilled tilapia"><img src="/images/tilapia.jpg" alt="Grilled tilapia with dodo" onerror="this.remove()"></div><h3>Grilled tilapia and dodo</h3><p>Whole fish with pepper sauce and fried plantain.</p><div class="row"><span class="price">₦6,500</span><a class="add" href="tel:+2340000000000">Order</a></div></article>
+<article class="card" data-c="sides"><div class="ph" data-name="Moi moi"><img src="/images/moi-moi.jpg" alt="Moi moi" onerror="this.remove()"></div><h3>Moi moi</h3><p>Steamed bean pudding with egg and fish.</p><div class="row"><span class="price">₦1,500</span><a class="add" href="tel:+2340000000000">Order</a></div></article>
+<article class="card" data-c="sides"><div class="ph" data-name="Dodo"><img src="/images/dodo.jpg" alt="Fried plantain" onerror="this.remove()"></div><h3>Dodo</h3><p>Sweet ripe plantain, crisp at the edges.</p><div class="row"><span class="price">₦1,200</span><a class="add" href="tel:+2340000000000">Order</a></div></article>
+</div></div></section>
+
+<section class="plant" id="plant-based"><div class="wrap"><div class="pic" role="img" aria-label="Plant-based dishes"></div><div class="txt">
+<h2>Plant-based and alternative proteins</h2><p>Our favourites, reimagined without meat. Explore swaps made from soy, beans, mushrooms and more, with the cost, protein and cooking method for each.</p>
+<ul><li>Suya, shawarma and stew swaps</li><li>Filter by budget and allergies</li><li>Protein, cost and CO2 for every option</li></ul>
+<a class="btn gold" href="/plant-based">Open plant-based menu</a></div></div></section>
+
+<section class="about" id="about"><div class="wrap"><div class="ph" data-name="Our kitchen"><img src="/images/kitchen.jpg" alt="Our kitchen" onerror="this.remove()"></div><div>
+<h2>Our story</h2><p>Mama Tolu Kitchen started with one pot and one rule: cook it the way you would for family.</p><p>Everything is made fresh each morning, from the pepper base to the pounded yam. Write your own story here, in two or three short lines.</p></div></div></section>
+
+<section><div class="wrap"><div class="head"><h2>What guests say</h2></div><div class="reviews">
+<blockquote><p>Sample review. Replace with a real guest comment.</p><cite>Guest name</cite></blockquote>
+<blockquote><p>Sample review. Replace with a real guest comment.</p><cite>Guest name</cite></blockquote>
+<blockquote><p>Sample review. Replace with a real guest comment.</p><cite>Guest name</cite></blockquote></div></div></section>
+
+<section class="visit" id="visit"><div class="wrap"><div><h3>Address</h3><p>Your street address<br>Abuja</p></div><div><h3>Hours</h3><p>Mon to Sat: 11am to 9pm<br>Sunday: 12pm to 8pm</p></div><div><h3>Order</h3><p>Phone: +234 000 000 0000</p></div></div></section>
+<footer>© Mama Tolu Kitchen &nbsp;|&nbsp; <a href="/plant-based">Plant-based menu</a></footer>
+<script>
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));t.classList.add('on');
+document.querySelectorAll('.card').forEach(c=>c.classList.toggle('hide',t.dataset.c!=='all'&&c.dataset.c!==t.dataset.c))});
+</script></body></html>
