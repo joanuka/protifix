@@ -1,12 +1,24 @@
-import csv, difflib, hashlib, itertools, json, math, os, re, threading, time, urllib.request
-from fastapi import FastAPI
+import csv, datetime, difflib, hashlib, html, itertools, json, math, os, pathlib, re, threading, time, urllib.request
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import HTTPException
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, HTMLResponse, Response
 from pydantic import BaseModel
 
+from smalltalk import smalltalk
+from feedback import router as feedback_router
+from admin import router as admin_router
+from accounts import router as accounts_router, account_id
+from make_alt_images import SLUGS, render as draw_alt  # names + one-line descriptions of every alternative food picture
+
+BASE_DIR = pathlib.Path(__file__).resolve().parent  # all files are found relative to app.py, so the server can start from any folder
+
 app = FastAPI(title="Mama Tolu Menu Consultant")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(CORSMiddleware, allow_origins=[o for o in os.getenv("ALLOWED_ORIGINS", "").split(",") if o],
+                   allow_methods=["GET", "POST", "DELETE"], allow_headers=["Content-Type"])
+app.include_router(feedback_router)
+app.include_router(admin_router)
+app.include_router(accounts_router)
 
 AV = {"High": 3, "Medium": 2, "Low": 1}
 DF = {"Easy": 1, "Medium": 2, "Hard": 3}
@@ -16,7 +28,7 @@ SENS = ["protein_g", "fat_g", "chewiness_score", "umami_score"]
 W = [0.8, 0.5, 1.4, 1.2]  # texture + umami decide whether it "feels like meat"
 
 rows = []
-with open("ingredients.csv", encoding="utf-8") as f:
+with open(BASE_DIR / "ingredients.csv", encoding="utf-8") as f:
     for r in csv.DictReader(f):
         for k in NUM:
             r[k] = float(r[k])
@@ -238,7 +250,7 @@ def gemini(system, messages, max_tokens):
     key = os.getenv("GEMINI_API_KEY")
     if not key:
         return None
-    model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+    model = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
     body = json.dumps({"system_instruction": {"parts": [{"text": system}]},
                        "contents": [{"role": "model" if m["role"] == "assistant" else "user", "parts": [{"text": m["content"]}]} for m in messages],
                        "generationConfig": {"maxOutputTokens": max_tokens, "temperature": 0.4}}).encode()
@@ -248,7 +260,8 @@ def gemini(system, messages, max_tokens):
         with urllib.request.urlopen(req, timeout=25) as r:
             return "".join(p.get("text", "") for p in json.load(r)["candidates"][0]["content"]["parts"])
     except Exception as e:
-        print("Gemini unavailable, using offline engine:", e)
+        detail = e.read().decode("utf-8", "ignore")[:300] if hasattr(e, "read") else ""
+        print("Gemini unavailable, using offline engine:", e, detail)
         return None
 
 
@@ -394,20 +407,34 @@ def warnings(p, d):
     return w
 
 
+# Plant foods are listed per 100 g cooked, but they hold less protein than meat. So every ingredient is
+# resized to give the SAME protein as the meat it replaces (cost, fat and CO2 grow with the weight).
+MAX_SCALE = 3.0  # at most 3x the 100 g portion (300 g) to match the meat's protein
+MIN_MATCH = 0.90  # an option must deliver at least 90% of the meat's protein, or it is not shown as a swap
+
+
+def scaled(r, d):
+    """One ingredient row, resized so its protein matches the meat's. Never shrinks a portion below 100 g."""
+    k = min(max(d["protein_g"] / r["protein_g"], 1.0), MAX_SCALE)
+    return dict(r, portion_g=int(round(100 * k / 5) * 5), protein_g=r["protein_g"] * k, fat_g=r["fat_g"] * k,
+                cost_per_portion_ngn=r["cost_per_portion_ngn"] * k, co2_kg_per_portion=r["co2_kg_per_portion"] * k)
+
+
 def rank(c):
     d = get_dish(c)
+    base = [scaled(r, d) for r in rows]  # every candidate sized to match the meat's protein
     budget, av, df, notes = c["budget"], c["av"], c["df"], []
     avoid = set(c.get("avoid", []))
     ok = lambda r: (r["cost_per_portion_ngn"] <= budget and r["av"] >= av and r["df"] <= df
                     and not (set(r.get("allergen_list", [])) & avoid))
     suits = (lambda r: re.search(r"Scramble|Omelette|Akara|Moi Moi|Fritters", r["name"])) if c.get("style") == "egg" else (lambda r: True)
-    pool = [r for r in rows if ok(r) and suits(r)]
+    pool = [r for r in base if ok(r) and suits(r)]
     if not pool and df < 3:
-        df = 3; notes.append("allowed harder prep"); pool = [r for r in rows if ok(r) and suits(r)]
+        df = 3; notes.append("allowed harder prep"); pool = [r for r in base if ok(r) and suits(r)]
     if not pool and av > 1:
-        av = 1; notes.append("allowed less-available ingredients"); pool = [r for r in rows if ok(r) and suits(r)]
+        av = 1; notes.append("allowed less-available ingredients"); pool = [r for r in base if ok(r) and suits(r)]
     if not pool:
-        budget = int(budget * 1.3); notes.append(f"raised the cap to ₦{budget}"); pool = [r for r in rows if ok(r) and suits(r)]
+        budget = int(budget * 1.3); notes.append(f"raised the cap to ₦{budget}"); pool = [r for r in base if ok(r) and suits(r)]
     if not pool:
         return []
     cands = []
@@ -418,17 +445,20 @@ def rank(c):
     for a, b in itertools.combinations(top, 2):
         for wa in (0.5, 0.7):
             p = {k: wa * a[k] + (1 - wa) * b[k] for k in NUM}
-            p.update(prep_time_mins=max(a["prep_time_mins"], b["prep_time_mins"]),
+            p.update(portion_g=int(round(wa * a["portion_g"] + (1 - wa) * b["portion_g"])),
+                     prep_time_mins=max(a["prep_time_mins"], b["prep_time_mins"]),
                      av=min(a["av"], b["av"]), df=max(a["df"], b["df"]),
                      allergen_list=sorted(set(a["allergen_list"]) | set(b["allergen_list"])),
                      price_confidence="Low" if "Low" in (a["price_confidence"], b["price_confidence"]) else "Medium")
             if not ok(p):
                 continue
             sa, sb = a["name"].split(" (")[0], b["name"].split(" (")[0]
+            p["pics"] = list(dict.fromkeys(pics_for(a)[:1] + pics_for(b)[:1]))
             p.update(name=f"{round(wa * 100)}% {sa} + {round((1 - wa) * 100)}% {sb}",
                      best_cooking_method=f"Blend {sa} and {sb}, season together, then {a['best_cooking_method'].lower()}",
                      availability_abuja="High" if p["av"] == 3 else "Medium" if p["av"] == 2 else "Low",
                      cooking_difficulty=[k for k, v in DF.items() if v == p["df"]][0])
+            p["title"] = p["name"]
             f, tx, cs = fit(p, d, c["goal"])
             cands.append((f, tx, cs, p, "blend", "blend"))
     cands.sort(key=lambda x: -x[0])
@@ -438,7 +468,7 @@ def rank(c):
             picked.append(x); seen.add(x[5])
     out = []
     for f, tx, cs, p, kind, _ in picked:
-        sv = d["cost"] - p["cost_per_portion_ngn"]
+        sv = d["cost"] - round(p["cost_per_portion_ngn"])  # use the rounded cost so the maths on screen adds up
         out.append(dict(name=p["name"], kind=kind, fit=round(min(f, 99), 1), texture=round(tx), cost_score=round(cs),
                         cost=round(p["cost_per_portion_ngn"]), save_plate=round(sv), save_week=round(sv * c["plates"]),
                         save_month=round(sv * c["plates"] * 4.3), protein=round(p["protein_g"], 1),
@@ -446,110 +476,298 @@ def rank(c):
                         prep=int(p["prep_time_mins"]), difficulty=p["cooking_difficulty"],
                         availability=p["availability_abuja"], how=p["best_cooking_method"],
                         allergens=p.get("allergen_list", []), price_confidence=p.get("price_confidence", "Low"),
-                        warnings=warnings(p, d)))
+                        warnings=warnings(p, d), **show_fields(p, c, d)))
     if notes and out:
         out[0]["relaxed"] = "To find a match I " + " and ".join(notes) + "."
     return out
 
 
-# ---------- 3. write the answer ----------
-PREP = [  # how to get each ingredient ready (so the advice is about the actual ingredient)
-    ("tsp", "soak in hot seasoned stock for 10 minutes, squeeze it dry, so it soaks up flavour instead of tasting like sponge"),
-    ("soy chunks", "soak in hot seasoned stock for 10 minutes and squeeze dry"),
-    ("tofu", "press it under a weight for 15 minutes, then pat dry so it browns instead of steaming"),
-    ("awara", "press it under a weight for 15 minutes, then pat dry so it browns instead of steaming"),
-    ("mushroom", "dry-sear in a hot pan first to drive out the water, then season, otherwise it goes rubbery and grey"),
-    ("seitan", "slice thin against the grain so it chews like meat, not like bread"),
-    ("melon", "shape into firm balls or patties and chill 15 minutes so they hold together"),
-    ("bean", "mash coarsely (not smooth) so there is still some bite, and chill before shaping"),
-    ("cowpea", "mash coarsely (not smooth) so there is still some bite, and chill before shaping"),
-    ("bambara", "mash coarsely (not smooth) so there is still some bite, and chill before shaping"),
-    ("jackfruit", "drain well and shred, then roast dry before adding any sauce"),
-    ("kuli", "use it as the coating, not the main body"),
-    ("groundnut", "roast the chunks dry first so they stay crunchy"),
-]
-METHOD = {
-    "egg": "Crumble it and fry in hot oil with onion, pepper and turmeric, stirring gently until just set",
-    "grill": "Skewer it, rub on the yaji, rest 20 minutes, then grill over high heat 3 to 4 minutes a side so it chars on the edges",
-    "wrap": "Slice into thin strips, season and sear hard in a very hot pan, then pile into the wrap with the sauce, cabbage and cucumber",
-    "soup": "Make the pepper soup base first and simmer it, then add the protein for the last 10 to 15 minutes so it keeps its shape",
-    "stew": "Fry the stew base until the oil rises, then add the protein for the last 10 to 15 minutes so it keeps its shape",
-    "fried": "Coat it, then shallow-fry in hot oil until deep golden, and drain on paper before serving",
-    "rice": "Sear the protein hard on its own, then lay it on top of the rice so it keeps its bite",
-}
+# ---------- 2b. pictures, "same protein, cheaper" prices, menu, cart and orders ----------
+ING_SLUG = [  # (word in the ingredient name, picture slug). First match wins, so order matters.
+    ("textured soy", "tsp"), ("tofu", "tofu"), ("tempeh", "tempeh"), ("seitan", "seitan"), ("wheat gluten", "seitan"),
+    ("king oyster", "king-oyster"), ("oyster", "oyster-mushroom"), ("button", "button-mushroom"), ("shiitake", "shiitake"),
+    ("jackfruit seed", "jackfruit-seed"), ("jackfruit", "jackfruit"), ("banana blossom", "banana-blossom"),
+    ("cowpea", "cowpea"), ("bambara", "bambara"), ("soybean", "soybean"), ("chickpea", "chickpea"), ("lentil", "lentil"),
+    ("pigeon", "pigeon-pea"), ("yam bean", "yam-bean"), ("lima", "lima-bean"), ("egusi", "egusi"), ("groundnut", "groundnut"),
+    ("kuli", "kuli-kuli"), ("walnut", "african-walnut"), ("pumpkin", "pumpkin-seed"), ("sunflower", "sunflower-seed"),
+    ("cashew", "cashew"), ("tiger nut", "tiger-nut"), ("ukwa", "ukwa"), ("ugba", "ugba"), ("plantain", "plantain"), ("maize", "maize")]
 
 
-def prep_for(a):
-    nm = a["name"].lower()
-    seen, notes = set(), []
-    for key, note in PREP:
-        if key in nm and note not in seen:
-            seen.add(note); notes.append(note)
-    return notes[:2]
+def pics_for(r):
+    """Which picture(s) show this food: 1 for a single ingredient, 2 for a blend (its two main ingredients)."""
+    if r.get("pics"):
+        return r["pics"]
+    nm = r["name"].lower()
+    if "moi moi" in nm:
+        return ["moi-moi"]
+    if "akara" in nm:
+        return ["akara"]
+    parts = []
+    for g, ing in re.findall(r"(\d+)g ([^;]+)", r.get("ingredient_basis", "")):
+        slug = next((sl for kw, sl in ING_SLUG if kw in ing.lower()), None)
+        if slug:
+            parts.append((float(g), slug))
+    out = []
+    for g, slug in sorted(parts, key=lambda x: -x[0]):
+        if slug not in out and (not out or g >= 12):  # a pinch of spice powder doesn't get its own picture
+            out.append(slug)
+    r["pics"] = out[:2] or ["tofu"]
+    return r["pics"]
 
-def allergen_line(c, a):
-    al = ", ".join(a.get("allergens") or []) or "no major allergens in the recipe"
-    avoid = c.get("avoid") or []
-    s = f"**Allergens:** {('contains ' + al) if a.get('allergens') else al}."
-    if avoid:
-        s += f" Filtered out everything containing {', '.join(avoid)}."
-    s += (" This only covers the ingredients in the recipe: check bought-in spice mixes and labels, and keep a separate "
-          "pan and surface for customers with allergies.")
-    if a.get("price_confidence") == "Low":
-        s += (f" **Price check:** the ₦{a['cost']} is an estimate (market prices for some of these ingredients are not "
-              "published), so confirm with your supplier before you cost the menu.")
-    return s
+
+def what_is(pics):
+    label, what = SLUGS[pics[0]][2], SLUGS[pics[0]][3]
+    return f"Made from {label} and {SLUGS[pics[1]][2]}. {what}" if len(pics) > 1 else what
 
 
+def title_of(pics):
+    return " + ".join(SLUGS[p][2] for p in pics)
+
+
+def img_urls(pics):
+    return [f"/alt-image/{p}" for p in pics]
+
+
+# What a customer pays for a plant-based swap.
+# Sized to match the meat's protein, and the kitchen's saving on the ingredient goes to the customer:
+#   price = plate price - meat cost + plant cost (for the same protein)
+SWAP_PASS_THROUGH = 1.0  # 1.0 = the customer gets the whole ingredient saving. Raise it (say 1.5) for bigger discounts
+SWAP_MIN_OFF = 0.10      # every swap is at least this much cheaper than the meat dish
+SWAP_MAX_OFF = 0.45      # ...and never more than this much cheaper
+
+
+def swap_price(menu_price, meat_cost, plant_cost):
+    saving = max(meat_cost - plant_cost, 0) * SWAP_PASS_THROUGH
+    off = min(max(saving / menu_price, SWAP_MIN_OFF), SWAP_MAX_OFF)
+    return int(round(menu_price * (1 - off) / 50) * 50)  # nearest ₦50, easy to give change
+
+
+with open(BASE_DIR / "menu.json", encoding="utf-8") as f:
+    MENU = json.load(f)["items"]
+MENU_BY_ID = {m["id"]: m for m in MENU}
+VARIANT_WORDS = ["Suya Strips", "Shawarma Strips", "Pepper Soup Chunks", "Stew Pieces", "Asun-Style", "Crispy Bites", "Jollof Rice Topper"]
+STYLE_VARIANT = {"grill": "Suya Strips", "wrap": "Shawarma Strips", "soup": "Pepper Soup Chunks", "stew": "Stew Pieces",
+                 "fried": "Crispy Bites", "rice": "Jollof Rice Topper"}
+MAX_PLANT_COST_SHARE = 0.8  # skip alternatives that cost more than 80% of the meat they replace: they can't be sold cheaper
+_swap_cache = {}
+
+
+def row_key(r):
+    return re.sub(r"[^a-z0-9]+", "-", r["name"].lower()).strip("-")
+
+
+def menu_price_for(c, d):
+    """Menu price of the meat dish: the real menu item if there is one, otherwise an estimate from the meat's cost."""
+    m = next((m for m in MENU if m.get("protein") == c["protein"] and m.get("style") == c["style"]), None)
+    return (m["price"], False) if m else (int(round(d["cost"] / 0.30 / 50) * 50), True)
+
+
+def show_fields(p, c, d):
+    pics = pics_for(p)
+    menu_price, est = menu_price_for(c, d)
+    price = swap_price(menu_price, d["cost"], p["cost_per_portion_ngn"])
+    return dict(pics=pics, title=p.get("title") or title_of(pics), images=img_urls(pics), what=what_is(pics), menu_price=menu_price, price=price,
+                price_estimated=est, off_pct=round(100 * (menu_price - price) / menu_price),
+                portion_g=p.get("portion_g", 100),
+                protein_off_pct=round(100 * (d["cost"] - p["cost_per_portion_ngn"]) / d["cost"]),
+                meat_cost=d["cost"], meat_protein=d["protein_g"])
+
+
+def swap_options(item):
+    """Every plant-based version of one menu dish: sized to match the meat's protein, cheaper, with picture."""
+    if item["id"] in _swap_cache:
+        return _swap_cache[item["id"]]
+    c = {"protein": item["protein"], "style": item["style"], "goal": "balanced"}
+    d = get_dish(c)
+    want, best = STYLE_VARIANT[item["style"]], {}
+    for r0 in rows:
+        if not [w for w in VARIANT_WORDS if w in r0["name"]] or want not in r0["name"]:
+            continue  # only foods built for this exact kind of dish
+        r = scaled(r0, d)
+        if r["protein_g"] < MIN_MATCH * d["protein_g"]:
+            continue  # capped portion still falls short on protein: do not sell it as a like-for-like swap
+        if r["av"] < 2 or r["cost_per_portion_ngn"] > MAX_PLANT_COST_SHARE * d["cost"]:
+            continue  # hard to buy in Abuja, or not actually cheaper once sized to match the protein
+        pics = tuple(pics_for(r))
+        score = fit(r, d, "balanced")[0]
+        if pics not in best or score > best[pics][0]:
+            best[pics] = (score, r)
+    out = []
+    for _, r in sorted(best.values(), key=lambda x: -x[0]):
+        pics = pics_for(r)
+        cost = r["cost_per_portion_ngn"]
+        price = swap_price(item["price"], d["cost"], cost)
+        out.append(dict(key=row_key(r), id=f"{item['id']}~{row_key(r)}", name=r["name"], title=title_of(pics), pics=pics, images=img_urls(pics),
+                        what=what_is(pics), how=r["best_cooking_method"], protein=round(r["protein_g"], 1),
+                        meat_protein=d["protein_g"], price=price, was=item["price"], save=item["price"] - price,
+                        off_pct=round(100 * (item["price"] - price) / item["price"]), allergens=r["allergen_list"],
+                        portion_g=r["portion_g"], protein_off_pct=round(100 * (d["cost"] - cost) / d["cost"]),
+                        portion=f"{r['portion_g']} g cooked, sized to match the meat's protein"))
+    _swap_cache[item["id"]] = out
+    return out
+
+
+def cheapest_swap(item):
+    opts = swap_options(item) if item.get("protein") else []
+    return min((o["price"] for o in opts), default=None)
+
+
+def priced_line(line_id):
+    """The one place a cart line gets its name and price. The browser only ever sends ids and quantities."""
+    if "~" in line_id:
+        mid, key = line_id.split("~", 1)
+        item = MENU_BY_ID.get(mid)
+        opt = next((o for o in swap_options(item) if o["key"] == key), None) if item and item.get("protein") else None
+        if not opt:
+            return None
+        return dict(id=line_id, name=f"{item['name']}, plant-based: {opt['title']}", sub=f"Sized to match the meat version's protein. {opt['how']}.", price=opt["price"],
+                    images=opt["images"], plant=True)
+    item = MENU_BY_ID.get(line_id)
+    if not item:
+        return None
+    return dict(id=line_id, name=item["name"], sub=item["desc"], price=item["price"], images=[f"/images/{item['img']}.jpg"], plant=False)
+
+
+class Line(BaseModel):
+    id: str
+    qty: int = 1
+
+
+class Quote(BaseModel):
+    lines: list[Line]
+
+
+class OrderIn(BaseModel):
+    name: str
+    phone: str
+    mode: str = "pickup"
+    address: str = ""
+    note: str = ""
+    lines: list[Line]
+
+
+def quote(lines):
+    out, missing = [], []
+    for ln in lines[:30]:
+        pl = priced_line(ln.id)
+        if not pl:
+            missing.append(ln.id)
+            continue
+        q = max(1, min(int(ln.qty), 20))
+        out.append(dict(pl, qty=q, total=pl["price"] * q))
+    return dict(lines=out, unavailable=missing, subtotal=sum(x["total"] for x in out))
+
+
+_orders_lock = threading.Lock()
+ORDERS_FILE = BASE_DIR / "orders.jsonl"
+
+
+def save_order(o):
+    with _orders_lock:
+        n = sum(1 for _ in open(ORDERS_FILE, encoding="utf-8")) if ORDERS_FILE.exists() else 0
+        o["order_id"] = f"MT-{1001 + n}"
+        with open(ORDERS_FILE, "a", encoding="utf-8") as f:
+            f.write(json.dumps(o, ensure_ascii=False) + "\n")
+    return o["order_id"]
+
+
+# ---------- 3. write the answer (short: one or two sentences, the cards hold the proof) ----------
 def offline_answer(c, recs):
     d, a = get_dish(c), recs[0]
-    short = a["name"].split(" (")[0]
-    menu = f"Chef's Plant {d['short']}" if a["kind"] == "blend" else f"{short} {d['short']}"
     s = (c["assumed"] + "\n\n") if c.get("assumed") else ""
-    pn = prep_for(a)
-    how = ("First, " + "; and ".join(pn) + ". " if pn else "") + METHOD[c["style"]]
-    s += f"For **{d['name']}** with a **₦{c['budget']}** cap, I'd go with **{a['name']}**. "
-    s += (f"It scores {a['texture']}/100 on texture against the real thing and costs ₦{a['cost']} a plate.\n\n"
-          f"**How to make it work:** {how}. Flavour it with {d['kit']}.\n\n"
-          f"**The money:** ₦{a['cost']} vs about ₦{d['cost']} for the animal version (a rough estimate, so use your own price) saves ₦{a['save_plate']} a plate. "
-          f"At {c['plates']} plates a week that is about **₦{a['save_week']:,} a week** (₦{a['save_month']:,} a month), "
-          f"and roughly {a['co2_week']} kg CO₂e less.\n\n")
-    s += "**Watch out:** " + ("; ".join(a["warnings"]) if a["warnings"] else "texture is the one thing to taste-test: cook one batch and let two regulars try it blind before it goes on the menu") + ". "
-    s += f"Sell it as \"{menu}\" as a weekend special and track how many plates sell.\n\n"
-    s += allergen_line(c, a) + "\n\n"
-    if len(recs) > 1:
-        s += f"**Runner-up:** {recs[1]['name']} at ₦{recs[1]['cost']} a plate if you want a different texture."
+    s += (f"Go with **{a['name']}**: ₦{a['cost']:,} a plate against about ₦{d['cost']:,} for the {c['protein']}, "
+          f"so you save **₦{a['save_plate']:,} a plate** (₦{a['save_week']:,} a week at {c['plates']} plates).")
+    if a["warnings"]:
+        s += f" Watch out: {a['warnings'][0]}."
     return s
 
 
 def answer(msg, hist, c, recs):
     data = {"constraints": c, "meat_dish": {k: get_dish(c)[k] for k in ("name", "cost", "protein_g", "kit")},
             "top3": recs}
-    sysmsg = ("You are the AI menu consultant for Abuja restaurants moving dishes to plant-based. Use ONLY the numbers "
-              "in DATA; never invent prices, protein or savings. Answer the person's actual message first. Then give: "
-              "your pick and why, a concrete cooking plan (method, seasoning, timing) using the flavour kit, the money "
-              "maths, one honest risk with how to test it, a menu name, and a one-line runner-up. Under 220 words, plain "
-              "text, **bold** for key numbers, speak like a practical chef-advisor. If the note says the limits were "
-              "relaxed, say so plainly. 'how' is how the ingredient is usually cooked; adapt it to the dish (for stew or soup, add it late so it holds its shape). If constraints.assumed is set, say that first. Always say which allergens the pick contains (the 'allergens' list) "
-              "and, if constraints.avoid is set, that those were excluded; remind them to check bought-in spice mixes and keep allergen-safe prep. "
-              "If the pick's price_confidence is Low, say the cost is an estimate to confirm with the supplier.")
+    sysmsg = ("You are the menu consultant for an Abuja restaurant moving dishes to plant-based. Use ONLY the numbers in DATA; "
+              "never invent prices, protein or savings. Reply in at most 2 sentences and under 40 words: the pick, its cost per "
+              "plate against the meat's cost (meat_dish.cost), and the saving per plate. Add one short warning only if "
+              "top3[0].warnings is not empty. Plain text, **bold** the key numbers. No cooking steps and no allergen paragraph: "
+              "the cards show those. If constraints.assumed is set, say it first in one sentence.")
     msgs = [{"role": h["role"], "content": h["content"]} for h in hist[-6:] if h.get("role") in ("user", "assistant")]
     msgs.append({"role": "user", "content": f"{msg}\n\nDATA: {json.dumps(data, ensure_ascii=False)}"})
-    return llm(sysmsg, msgs, os.getenv("ANSWER_MODEL", "claude-sonnet-5-5"), 700)
+    return llm(sysmsg, msgs, os.getenv("ANSWER_MODEL", "claude-sonnet-5-5"), 200)
+
+
+STRONG_Q = re.compile(r"^\s*(why|how|what is|what are|what's|whats|explain|tell me|who)\b", re.I)
+SOFT_Q = re.compile(r"^\s*(can you|can i|could you|do you|do i|does|should i|is |are |which)", re.I)
+SWAP_WORDS = re.compile(r"instead|swap|replace|alternative|substitute|cheap|budget|under|plates")
+
+
+def is_chat_question(m):
+    """Questions and chat go to the conversational AI. Requests with a budget or number stay with the data engine."""
+    if re.search(r"\d|₦", m):
+        return False
+    return bool(STRONG_Q.search(m)) or (bool(SOFT_Q.search(m)) and not SWAP_WORDS.search(m.lower()))
+
+
+def menu_brief():
+    """The real menu and its best swaps, given to the AI so it never has to invent a price or a protein number."""
+    out = []
+    for m in MENU:
+        line = f"{m['name']} N{m['price']}"
+        if m.get("protein"):
+            line += f" ({m['protein']} {m['style']}). Swaps: " + "; ".join(
+                f"{o['title']} N{o['price']} ({o['protein']} g protein, {o['off_pct']}% cheaper, contains {', '.join(o['allergens']) or 'no major allergens'})"
+                for o in swap_options(m)[:2])
+        out.append(line)
+    return "\n".join(out)
+
+
+CONVO_SYSTEM = (
+    "You are the AI assistant of Mama Tolu Kitchen, a Nigerian restaurant in Abuja. Chat like a warm, friendly server: "
+    "greet back, handle small talk, and answer questions about the menu, plant-based swaps, protein, allergens and cooking. "
+    "For a greeting or small talk, reply warmly in one short sentence and ask what they need. "
+    "NEVER list dishes, prices or the menu unless the customer asks about the menu or names a specific food. "
+    "Reply in the language the customer writes in (English, Pidgin, Hausa, Yoruba or Igbo). Keep it to 3 sentences or fewer, plain text. "
+    "Your main job: meat is expensive, so help people who cannot afford it or do not eat it find a plant-based swap with the SAME protein for less. "
+    "For any price, protein, saving or allergen use ONLY the MENU data given; never invent numbers, and say so if the data does not have it. "
+    "When it fits, invite the customer to name a dish (for example 'chicken pepper soup') or open the Swap and save tab. "
+    "You cannot place orders yourself. Give no medical advice: for allergies, say the recipe data lists allergens but they should confirm with staff. "
+    "If asked about something unrelated, answer in one friendly sentence and steer back to food.")
+
+
+def converse(message, history, state):
+    """A natural conversation grounded in the real menu. Returns None if no AI is switched on or it fails."""
+    msgs = [{"role": h["role"], "content": h["content"]} for h in (history or [])[-6:] if h.get("role") in ("user", "assistant")]
+    msgs.append({"role": "user", "content": f"{message}\n\nMENU (prices in naira):\n{menu_brief()}"})
+    try:
+        return llm(CONVO_SYSTEM, msgs, os.getenv("ANSWER_MODEL", "claude-sonnet-5-5"), 300)
+    except Exception as e:
+        print("converse failed:", e)
+        return None
 
 
 @app.post("/chat")
 def chat(req: Chat):
-    c = parse(req.message, req.state)
+    t = smalltalk(req.message)  # hi / how are you / thanks: answered straight away, no menu dump
+    if t:
+        return {"answer": t, "recommendations": [], "state": req.state, "mode": "offline"}
+    if is_chat_question(req.message):
+        ai = converse(req.message, req.history, req.state)
+        if ai:
+            return {"answer": ai, "recommendations": [], "state": req.state, "mode": provider()}
+    prev = req.state
+    if mentions_dish(fix_spelling(req.message.lower())):  # a new food starts fresh: only allergy filters carry over
+        prev = {k: v for k, v in prev.items() if k == "avoid"}
+    c = parse(req.message, prev)
     if c.pop("unknown", False):
+        ai = converse(req.message, req.history, req.state)
+        if ai:
+            return {"answer": ai, "recommendations": [], "state": req.state, "mode": provider()}
         low = req.message.lower()
         if any(w in low for w in ["bean", "moi", "akara", "tofu", "soy", "egusi", "okpa", "groundnut", "plantain", "mushroom", "vegetable"]):
             msg = ("That already sounds like a plant food, so there is nothing to swap. Tell me the animal protein you "
                    "want to replace and how you cook it, for example ponmo stew, egg sauce or chicken suya.")
         else:
-            msg = ("I didn't recognise that one yet. I can swap beef, goat, chicken, turkey, fish, egg, snail, prawns, "
-                   "stockfish, ponmo, shaki (tripe), liver and gizzard, cooked as suya, shawarma, pepper soup, stew, "
-                   "fried, jollof topper or egg scramble. Tell me which one and I'll redo it.")
+            msg = ("Sorry, I didn't quite get that. You can ask me a question about our menu, or tell me a dish "
+                   "you'd like a cheaper plant-based swap for.")
         return {"answer": msg,
                 "recommendations": [], "state": req.state, "mode": "offline"}
     recs = rank(c)
@@ -567,9 +785,44 @@ def chat(req: Chat):
                            "goal": c["goal"], "avoid": c.get("avoid", []), "max_difficulty": [k for k, v in DF.items() if v == c["df"]][0]}}
 
 
-@app.get("/")
+@app.get("/ai-check")
+def ai_check():
+    """Open http://127.0.0.1:8006/ai-check to see which AI is switched on and whether it answers."""
+    if os.getenv("DEBUG_TOOLS") != "1":
+        raise HTTPException(status_code=404)
+    prov = provider()
+    if prov == "offline":
+        return {"provider": "offline", "works": False,
+                "problem": "No key found. Set GEMINI_API_KEY, BEDROCK_MODEL_ID or ANTHROPIC_API_KEY in the same terminal that runs uvicorn."}
+    out = _llm_call("Reply with the single word OK.", [{"role": "user", "content": "ping"}], os.getenv("ANSWER_MODEL", "claude-sonnet-5-5"), 20)
+    return {"provider": prov, "works": bool(out), "reply": out,
+            "if_not_working": "Look in the uvicorn terminal for the line that says 'unavailable': it names the error."}
+
+
+def menu_cards_html():
+    """The menu cards on the home page, built from menu.json so prices live in one place."""
+    out = []
+    for m in MENU:
+        cheap = cheapest_swap(m)
+        swap = (f'<a class="swap" href="/plant-based?dish={m["id"]}">Plant-based version from ₦{cheap:,}</a>' if cheap else "")
+        out.append(
+            f'<article class="card" data-c="{m["cat"]}"><div class="ph" data-name="{html.escape(m["name"])}">'
+            f'<img src="/images/{m["img"]}.jpg" alt="{html.escape(m["name"])}" loading="lazy" onerror="this.remove()"></div>'
+            f'<h3>{html.escape(m["name"])}</h3><p>{html.escape(m["desc"])}</p>{swap}'
+            f'<div class="row"><span class="price">₦{m["price"]:,}</span>'
+            f'<a class="add" href="/order?add={m["id"]}" aria-label="Order {html.escape(m["name"])}">Order</a></div></article>')
+    return "\n".join(out)
+
+
+@app.get("/", response_class=HTMLResponse)
 def home():
-    return FileResponse(BASE_DIR / "restaurant.html")
+    page = (BASE_DIR / "restaurant.html").read_text(encoding="utf-8")
+    return HTMLResponse(page.replace("<!--MENU_CARDS-->", menu_cards_html()))
+
+
+@app.get("/order")
+def order_page():
+    return FileResponse(BASE_DIR / "order.html")
 
 
 @app.get("/plant-based")
@@ -577,9 +830,80 @@ def ui():
     return FileResponse(BASE_DIR / "index.html")
 
 
+@app.get("/api/menu")
+def api_menu():
+    return {"items": [dict(m, swap_from=cheapest_swap(m)) for m in MENU]}
+
+
+@app.get("/api/swaps/{item_id}")
+def api_swaps(item_id: str):
+    item = MENU_BY_ID.get(item_id)
+    if not item or not item.get("protein"):
+        raise HTTPException(status_code=404, detail="No plant-based swap for this dish")
+    d = get_dish({"protein": item["protein"], "style": item["style"]})
+    return {"item": dict(item, image=f"/images/{item['img']}.jpg", meat=item["protein"]), "meat_protein_g": d["protein_g"],
+            "options": swap_options(item)}
+
+
+@app.post("/api/quote")
+def api_quote(req: Quote):
+    return quote(req.lines)
+
+
+@app.post("/api/orders")
+def api_order(req: OrderIn, request: Request):
+    name, phone = req.name.strip()[:80], req.phone.strip()[:30]
+    if len(name) < 2:
+        raise HTTPException(status_code=400, detail="Please tell us your name.")
+    digits = re.sub(r"\D", "", phone)
+    if not 10 <= len(digits) <= 15:
+        raise HTTPException(status_code=400, detail="Please enter a phone number we can call, like 0803 000 0000.")
+    mode = req.mode if req.mode in ("pickup", "delivery") else "pickup"
+    address = req.address.strip()[:200]
+    if mode == "delivery" and len(address) < 6:
+        raise HTTPException(status_code=400, detail="Please add your delivery address.")
+    q = quote(req.lines)
+    if q["unavailable"]:
+        raise HTTPException(status_code=409, detail="Something in your order is no longer on the menu. Please check your basket.")
+    if not q["lines"]:
+        raise HTTPException(status_code=400, detail="Your basket is empty.")
+    order = dict(created=datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"), name=name, phone=phone,
+                 mode=mode, address=address if mode == "delivery" else "", note=req.note.strip()[:300],
+                 items=[dict(id=x["id"], name=x["name"], qty=x["qty"], price=x["price"], total=x["total"]) for x in q["lines"]],
+                 total=q["subtotal"], user=account_id(request))
+    oid = save_order(order)
+    return {"ok": True, "order_id": oid, "total": order["total"], "mode": mode, "items": order["items"]}
+
+
+@app.get("/alt-image/{slug}")
+def alt_image(slug: str):
+    """The picture of an alternative food. A real photo (jpg/png/webp) in images/alt/ beats the drawn picture."""
+    slug = re.sub(r"[^a-z0-9-]", "", slug.lower())
+    for ext in (".jpg", ".jpeg", ".png", ".webp", ".avif"):
+        f = IMG_DIR / "alt" / (slug + ext)
+        if f.is_file():
+            return FileResponse(f)
+    svg = draw_alt(slug)
+    if svg:
+        return Response(content=svg, media_type="image/svg+xml")
+    raise HTTPException(status_code=404)
+
+
+@app.get("/credits", response_class=HTMLResponse)
+def credits():
+    """Photo credits (required by the Creative Commons licences of the alternative-protein photos)."""
+    p = BASE_DIR / "images" / "alt" / "CREDITS.txt"
+    rows = [l.split(" | ") for l in p.read_text(encoding="utf-8").splitlines() if l.count(" | ") >= 3] if p.exists() else []
+    li = "".join(f'<li>{r[0]}: photo by {r[1]}, {r[2]}, <a href="{r[3].strip()}">source</a></li>' for r in rows)
+    return f"<!DOCTYPE html><meta charset=utf-8><title>Photo credits</title><body style='font-family:sans-serif;max-width:720px;margin:40px auto;padding:0 20px;line-height:1.7'><h1>Photo credits</h1><p>Photos of alternative proteins are from Wikimedia Commons under Creative Commons licences.</p><ul>{li}</ul><p><a href='/'>Back to the restaurant</a></p>"
+
+
+@app.get("/cart.js")
+def cart_js():
+    return FileResponse(BASE_DIR / "cart.js", media_type="application/javascript")
+
+
 # ---- Images: finds your photos whatever the extension (.jpg .png .webp) or capitalisation ----
-import pathlib
-BASE_DIR = pathlib.Path(__file__).resolve().parent
 IMG_DIR = BASE_DIR / "images"
 IMG_EXT = {".jpg", ".jpeg", ".png", ".webp", ".avif", ".jfif", ".gif"}
 IMG_DIR.mkdir(exist_ok=True)
@@ -595,6 +919,8 @@ def _image_files():
 
 @app.get("/images-check")
 def images_check():
+    if os.getenv("DEBUG_TOOLS") != "1":
+        raise HTTPException(status_code=404)
     return {"looking_in": str(IMG_DIR), "images_found": sorted(f.name for f in _image_files())}
 
 

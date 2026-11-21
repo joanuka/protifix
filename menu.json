@@ -1,0 +1,15 @@
+{
+  "_note": "Single source of truth for dishes and prices (naira). Edit prices here and every page updates. 'protein' + 'style' are what the plant-based swap is worked out from.",
+  "items": [
+    {"id": "jollof-chicken", "cat": "rice", "name": "Jollof rice and chicken", "desc": "Smoky party-style jollof with grilled chicken and plantain.", "price": 4500, "img": "jollof", "protein": "chicken", "style": "rice"},
+    {"id": "fried-rice-turkey", "cat": "rice", "name": "Fried rice and turkey", "desc": "Mixed vegetables and tender turkey, served with coleslaw.", "price": 5000, "img": "fried-rice", "protein": "turkey", "style": "rice"},
+    {"id": "egusi", "cat": "soup", "name": "Pounded yam and egusi", "desc": "Melon-seed soup with assorted meat and stockfish.", "price": 5500, "img": "egusi", "protein": "beef", "style": "soup"},
+    {"id": "amala-goat", "cat": "soup", "name": "Amala, ewedu and gbegiri", "desc": "The Ibadan classic with goat meat.", "price": 4800, "img": "amala", "protein": "goat", "style": "stew"},
+    {"id": "efo-riro", "cat": "soup", "name": "Efo riro", "desc": "Spinach stew with assorted meat, served with eba or rice.", "price": 4800, "img": "efo-riro", "protein": "beef", "style": "stew"},
+    {"id": "pepper-soup-goat", "cat": "soup", "name": "Goat meat pepper soup", "desc": "Hot, peppery and full of spice.", "price": 4000, "img": "pepper-soup", "protein": "goat", "style": "soup"},
+    {"id": "suya-beef", "cat": "grill", "name": "Beef suya", "desc": "Charcoal grilled with yaji, onions and tomato.", "price": 3500, "img": "suya", "protein": "beef", "style": "grill"},
+    {"id": "tilapia-dodo", "cat": "grill", "name": "Grilled tilapia and dodo", "desc": "Whole fish with pepper sauce and fried plantain.", "price": 6500, "img": "tilapia", "protein": "fish", "style": "grill"},
+    {"id": "moi-moi", "cat": "sides", "name": "Moi moi", "desc": "Steamed bean pudding with egg and fish.", "price": 1500, "img": "moi-moi"},
+    {"id": "dodo", "cat": "sides", "name": "Dodo", "desc": "Sweet ripe plantain, crisp at the edges.", "price": 1200, "img": "dodo"}
+  ]
+}

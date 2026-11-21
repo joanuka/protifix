@@ -3,3 +3,9 @@
 .venv/
 venv/
 .env
+
+__pycache__/
+*.db
+orders.jsonl
+order_status.json
+*.before_*

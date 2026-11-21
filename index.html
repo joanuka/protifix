@@ -1,86 +1,197 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mama Tolu Menu Consultant</title>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Plant-based menu | pritifit</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f6f4f0;--card:#fff;--ink:#222;--mut:#6b6b6b;--g:#1f4d36;--gd:#1f4d36;--line:#e2dfd9;--chip:#fff;--gold:#e8a317;--warnc:#9a5b00}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
-h1,h2,h3,h4,.logo{font-family:Oswald,"Arial Narrow",Impact,sans-serif;text-transform:uppercase;letter-spacing:.03em}
-.wrap{max-width:980px;margin:0 auto;padding:0 20px 30px}
-nav{background:#fff;box-shadow:0 1px 0 #e6e6e6;position:sticky;top:0;z-index:10}
-nav .in{max-width:1160px;margin:0 auto;padding:0 22px;height:64px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:1.5rem;font-weight:700;text-decoration:none;color:#b3261e}.logo b{color:#171717}
-nav a.back{font-weight:600;font-size:.92rem;text-decoration:none;color:#222}nav a.back:hover{color:#b3261e}
-.hero{position:relative;background:#163a29 url(/images/plant-based.jpg) center/cover;color:#fff;padding:64px 22px}
-.hero::before{content:"";position:absolute;inset:0;background:rgba(14,40,28,.82)}
-.hero>div{position:relative;max-width:980px;margin:0 auto}
-.hero h1{margin:0 0 12px;font-size:clamp(2rem,5.5vw,3.4rem);line-height:1.05}
-.hero p{margin:0;max-width:40em;color:#d7e6dc;font-size:1.05rem}
-#wiz{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--gold);padding:22px;margin:-28px 0 22px;position:relative;border-radius:3px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
-#wiz h3{margin:0 0 14px;font-size:1.25rem;color:var(--g)}
-.big{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px}
-.big button{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 8px;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--ink);font:600 .92rem Inter,sans-serif;cursor:pointer;transition:border-color .15s,background .15s}
-.big button span{font-size:1.7rem;line-height:1}.big button:hover,.big button:focus-visible{border-color:var(--g);background:#eef5f0}
+:root{--bg:#fdf1e2;--card:#fff;--ink:#2b2622;--mut:#8a7f76;--red:#e8431f;--org:#f08a24;--grn:#5cbf3a;--pur:#6c5ce7;--cor:#e8706a;--yel:#ffd43b;--line:#f1e3d0;--gd:#1f6b3a}
+*{box-sizing:border-box}
+body{margin:0;font-family:Poppins,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+h1,h2,h3,h4{font-family:Poppins,sans-serif;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px 40px}
+nav{position:sticky;top:0;z-index:10;background:rgba(253,241,226,.92);backdrop-filter:blur(8px)}
+nav .in{max-width:1080px;margin:0 auto;padding:0 22px;height:70px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1.15rem;color:var(--red);text-decoration:none}
+.logo i{width:30px;height:30px;border-radius:50%;background:var(--red);display:grid;place-items:center;color:#fff;font-style:normal;font-size:.9rem}
+nav .r{display:flex;align-items:center;gap:22px}
+nav a.back{font-size:.85rem;font-weight:500;color:var(--ink);text-decoration:none}nav a.back:hover{color:var(--red)}
+.cartlink{background:#fff;color:var(--ink)!important;padding:9px 18px;border-radius:30px;font-weight:600;font-size:.85rem;text-decoration:none;box-shadow:0 4px 14px rgba(232,67,31,.12)}
+.cartlink span{display:inline-block;min-width:20px;padding:0 6px;margin-left:6px;border-radius:10px;background:var(--red);color:#fff;font-size:.75rem;text-align:center}
+.hero{max-width:1080px;margin:0 auto;padding:34px 22px 50px;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+.hero h1{font-family:"Playfair Display",Georgia,serif;font-weight:400;font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.12;text-transform:none}
+.hero h1 em{color:var(--org);font-style:normal}
+.hero p{color:var(--mut);font-size:.95rem;max-width:30em;margin:16px 0 22px}
+.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:600;font-size:.9rem;padding:12px 26px;border-radius:30px;border:0;cursor:pointer;font-family:inherit}
+.cta:hover,.go:hover,button.send:hover{background:#c9371a}
+.disc{position:relative;aspect-ratio:1;max-width:400px;justify-self:center;width:100%;border-radius:50%;background:var(--yel) url(/images/plant-based.jpg) center/cover;box-shadow:0 24px 50px rgba(240,138,36,.3)}
+.disc b{position:absolute;top:-6px;right:-6px;width:92px;height:92px;border-radius:50%;background:var(--grn);color:#fff;display:grid;place-items:center;text-align:center;font-size:.8rem;line-height:1.2;padding:8px;transform:rotate(12deg)}
+.tabs{display:inline-flex;background:#fff;padding:5px;border-radius:40px;margin:0 0 22px;box-shadow:0 6px 20px rgba(0,0,0,.05)}
+.tabs button{padding:10px 24px;border:0;background:none;color:var(--mut);font:600 .88rem Poppins,sans-serif;cursor:pointer;border-radius:30px}
+.tabs button[aria-selected=true]{background:var(--red);color:#fff}
+.sec{font-size:1.3rem;font-weight:600;margin:6px 0 14px}
+.sec::after{content:"";display:block;width:44px;height:3px;background:var(--red);margin-top:6px;border-radius:2px}
+.rail{position:relative;background:#fff;border-radius:44px;padding:30px 46px;margin-bottom:10px;box-shadow:0 10px 30px rgba(0,0,0,.04)}
+.arr{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:0;background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.14);font-size:1.1rem;cursor:pointer;z-index:2}
+.arr.l{left:-12px}.arr.r{right:-12px}
+.dishes{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:46px 4px 8px;scrollbar-width:none}
+.dishes::-webkit-scrollbar{display:none}
+.dish{flex:0 0 150px;scroll-snap-align:start;position:relative;border:0;border-radius:22px;padding:0 12px 14px;color:#fff;text-align:center;cursor:pointer;font:inherit;background:var(--cor);box-shadow:0 10px 20px rgba(0,0,0,.12)}
+.dish:nth-child(4n+2){background:var(--org)}.dish:nth-child(4n+3){background:var(--grn)}.dish:nth-child(4n+4){background:var(--pur)}
+.dish .im{width:96px;height:96px;margin:-40px auto 8px;border-radius:50%;border:5px solid rgba(255,255,255,.85);overflow:hidden;background:#3a302a}
+.dish img{width:100%;height:100%;object-fit:cover;display:block}
+.dish b{display:block;font-size:.84rem;line-height:1.25;min-height:2.1em}.dish small{display:block;font-size:.78rem;font-weight:600;opacity:.95}
+.dish[aria-pressed=true]{outline:4px solid var(--yel);outline-offset:3px}
+#swapres{margin-top:26px}
+.shead{display:flex;gap:16px;align-items:center;background:#fff;padding:14px 18px;border-radius:24px;box-shadow:0 6px 20px rgba(0,0,0,.04)}
+.shead img{width:74px;height:74px;object-fit:cover;border-radius:50%;background:#3a302a}
+.shead h3{font-size:1.15rem;color:var(--red)}.shead p{margin:2px 0 0;font-size:.85rem;color:var(--mut)}
+.bar2{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:18px 0 14px}
+.fl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.82rem;font-weight:600}
+.fl button{background:#fff;border:1px solid var(--line);padding:6px 14px;border-radius:30px;font:500 .8rem Poppins,sans-serif;cursor:pointer}
+.fl button[aria-pressed=true]{background:var(--red);border-color:var(--red);color:#fff}
+.bar2 select{padding:7px 12px;border:1px solid var(--line);border-radius:30px;font:500 .84rem Poppins,sans-serif;background:#fff}
+.alts{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:20px}
+.alt{background:#fff;border-radius:26px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 26px rgba(0,0,0,.05)}
+.pics{position:relative;display:flex;aspect-ratio:4/3;background:#f6e6cd}.pics img{flex:1;min-width:0;height:100%;object-fit:cover;display:block}
+.pics img+img{border-left:3px solid #fff}
+.off{position:absolute;top:12px;left:12px;background:var(--grn);color:#fff;font:600 .78rem Poppins,sans-serif;padding:4px 12px;border-radius:30px}
+.alt .bd{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+.alt h3{font-size:1.05rem;margin-bottom:4px}
+.alt .what{margin:0 0 8px;font-size:.86rem}.alt .how{margin:0 0 10px;font-size:.78rem;color:var(--mut)}
+.facts{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.facts span{background:#fff3e4;color:#b05a00;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:30px}
+.facts em{font-style:normal;font-weight:500;color:var(--mut)}
+.buy{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin-top:auto;padding-top:12px}
+.buy s{color:var(--mut);font-size:.84rem}.buy .p{font:700 1.5rem Poppins,sans-serif;color:var(--red);line-height:1.1;display:block}.buy small{display:block;color:var(--gd);font-weight:600;font-size:.76rem}
+.go{background:var(--red);color:#fff;text-decoration:none;padding:10px 20px;border-radius:30px;font:600 .85rem Poppins,sans-serif;white-space:nowrap}
+.note{font-size:.78rem;color:var(--mut);margin:18px 0 0}
+.state{background:#fff;border:1px dashed #e6cfae;padding:22px;text-align:center;color:var(--mut);border-radius:22px}
+#wiz{background:#fff;padding:22px;margin:0 0 20px;border-radius:26px;box-shadow:0 8px 24px rgba(0,0,0,.05)}
+#wiz h3{margin:0 0 8px;font-size:1.2rem;color:var(--red)}#wiz .hint{margin:0;color:var(--mut);font-size:.88rem}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px}
-.chip{background:#fff;border:1px solid var(--line);padding:7px 14px;border-radius:30px;font-size:.84rem;cursor:pointer;font-weight:500}.chip:hover{border-color:var(--g);color:var(--g)}
+.chip{background:#fff;border:1px solid var(--line);padding:7px 15px;border-radius:30px;font-size:.8rem;cursor:pointer;font-weight:500}.chip:hover{border-color:var(--red);color:var(--red)}
 .msg{margin:14px 0;display:flex}.msg.u{justify-content:flex-end}
-.bub{max-width:100%;padding:16px 18px;border-radius:3px;font-size:.96rem;background:var(--card);border:1px solid var(--line)}
-.u .bub{background:var(--g);color:#fff;border-color:var(--g);max-width:78%}
-.tag{font-size:.78rem;color:var(--mut);margin:0 0 10px;padding-bottom:10px;border-bottom:1px solid var(--line)}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:14px}
-.rc{border:1px solid var(--line);border-top:4px solid var(--g);border-radius:3px;padding:14px;font-size:.86rem;background:#fff}
-.rc h4{margin:0 0 8px;font-size:1.05rem;color:var(--g)}
-.rc .b{display:inline-block;background:var(--g);color:#fff;border-radius:2px;padding:2px 9px;margin:2px 4px 2px 0;font-size:.76rem;font-weight:600}
-.bar{height:6px;background:#ece9e3;margin:4px 0 8px;overflow:hidden}.bar i{display:block;height:100%;background:var(--gold)}
-.warn{color:var(--warnc);font-size:.8rem;margin-top:5px}
-.al{font-size:.8rem;margin-top:8px;padding:5px 9px;background:#f3f6f4;border-left:3px solid var(--g)}
-.al.has{border-color:#b3261e;background:#fbefed;color:#8f1d17;font-weight:600}
-.est{font-size:.76rem;color:var(--mut);margin-top:5px}
-.mic,.listen{background:#fff;color:var(--g);font-weight:600;cursor:pointer;border:1px solid var(--line);border-radius:3px}
-.mic{padding:0 16px;font-size:1.1rem}.mic.on{background:#b3261e;color:#fff;border-color:#b3261e}.listen{margin-top:12px;padding:8px 16px;font-size:.88rem}.listen:hover{border-color:var(--g)}
+.bub{max-width:100%;padding:16px 20px;border-radius:24px;font-size:.92rem;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.04)}
+.u .bub{background:var(--red);color:#fff;max-width:78%;border-bottom-right-radius:6px}
+.tag{font-size:.76rem;color:var(--mut);margin:0 0 10px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:14px}
+.rc{border-radius:22px;font-size:.84rem;background:#fff9f1;overflow:hidden;padding-bottom:14px;border:1px solid var(--line)}
+.rc .pics{aspect-ratio:16/9}.rc .in{padding:12px 14px 0}
+.rc h4{font-size:1rem;color:var(--red);margin-bottom:6px}
+.rc .sell{margin:8px 0;padding:9px 12px;background:#fde6e0;border-radius:14px;font-size:.82rem}.rc .sell b{color:var(--red);font-size:1rem}
+.proof{width:100%;border-collapse:collapse;font-size:.82rem;margin:6px 0 8px}
+.proof th{text-align:right;font-weight:600;color:var(--mut);font-size:.74rem}
+.proof td{padding:4px 0;border-top:1px solid var(--line)}.proof td+td{text-align:right}
+.rc details{margin-top:8px;font-size:.8rem;color:var(--mut)}.rc summary{cursor:pointer;color:var(--red);font-weight:600}
+.warn{color:#9a5b00;font-size:.8rem;margin-top:5px}
+.al{font-size:.78rem;margin-top:8px;padding:6px 12px;background:#eaf6e4;border-radius:12px;color:var(--gd)}
+.al.has{background:#fde6e0;color:#a02a12;font-weight:600}
+.est{font-size:.74rem;color:var(--mut);margin-top:5px}
+.mic,.listen{background:#fff;color:var(--red);font-weight:600;cursor:pointer;border:1px solid var(--line);border-radius:30px;font-family:inherit}
+.mic{padding:0 18px;font-size:.85rem}.mic.on{background:var(--red);color:#fff}.listen{margin-top:12px;padding:8px 18px;font-size:.84rem}
 .row{display:flex;gap:8px;position:sticky;bottom:0;background:var(--bg);padding:12px 0}
-input{flex:1;padding:14px;border:1px solid var(--line);border-radius:3px;font:1rem Inter,sans-serif;background:#fff;color:var(--ink)}
-input:focus{outline:2px solid var(--g);outline-offset:0}
-button.send{background:#b3261e;color:#fff;border:0;border-radius:3px;padding:0 26px;font:600 1rem Oswald,sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer}button.send:hover{background:#8f1d17}
-button:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+input{flex:1;padding:14px 20px;border:1px solid var(--line);border-radius:30px;font:.95rem Poppins,sans-serif;background:#fff;color:var(--ink)}
+input:focus{outline:2px solid var(--red)}
+button.send{background:var(--red);color:#fff;border:0;border-radius:30px;padding:0 28px;font:600 .9rem Poppins,sans-serif;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid var(--yel);outline-offset:2px}
+footer{max-width:1080px;margin:10px auto 0;padding:24px 22px 34px;font-size:.78rem;color:var(--mut);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+[hidden]{display:none!important}
+@media(max-width:760px){.hero{grid-template-columns:1fr;text-align:center}.hero p{margin-inline:auto}.disc{max-width:270px;order:-1}nav .back{display:none}.rail{padding:26px 22px}.arr{display:none}.alts{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style></head><body>
-<nav><div class="in"><a class="logo" href="/">Mama Tolu <b>Kitchen</b></a><a class="back" href="/">Back to restaurant</a></div></nav>
-<header class="hero"><div><h1>Plant-based and alternative proteins</h1><p>Tell us the dish, your budget and your kitchen. We recommend a plant-based swap, show the costs, and explain how to cook it. Ask follow-ups any time, like "make it cheaper".</p></div></header>
+<nav><div class="in"><a class="logo" href="/"><i>M</i>Mama Tolu Kitchen</a><div class="r"><a class="back" href="/">Back to restaurant</a><a class="cartlink" href="/order">Order <span data-cart-count hidden>0</span></a></div></div></nav>
+<header class="hero"><div><h1>Love your dish? Keep the flavour, <em>skip the meat.</em></h1><p>Swap the meat for a plant-based protein with the same protein, a picture of exactly what you get, and a lower price.</p><a class="cta" href="#p-swap">Explore swaps</a></div><div class="disc" role="img" aria-label="Plant-based dish"><b>Swap<br>&amp; save</b></div></header>
 <div class="wrap">
-<div id="wiz"></div>
-<div class="chips" id="chips"></div>
-<div id="log"></div>
-<div class="row"><input id="q" placeholder="e.g. Cheap chewy swap for beef suya under ₦650, easy prep, 150 plates a week" autofocus><button class="mic" id="mic" title="Speak" onclick="listenMic()">Voice</button><button class="send" onclick="send()">Ask</button></div>
+<div class="tabs" role="tablist" aria-label="Plant-based menu">
+  <button role="tab" id="t-swap" aria-selected="true" aria-controls="p-swap">Swap and save</button>
+  <button role="tab" id="t-ask" aria-selected="false" aria-controls="p-ask">Kitchen consultant</button>
 </div>
+<section class="panel" id="p-swap" role="tabpanel" aria-labelledby="t-swap">
+  <h2 class="sec">1. Pick the dish you would normally order</h2>
+  <div class="rail"><button class="arr l" aria-label="Previous dishes" onclick="rail(-1)">&#8249;</button><div class="dishes" id="dishes"><div class="state" style="flex:1">Loading the menu…</div></div><button class="arr r" aria-label="Next dishes" onclick="rail(1)">&#8250;</button></div>
+  <div id="swapres" hidden></div>
+</section>
+<section class="panel" id="p-ask" role="tabpanel" aria-labelledby="t-ask" hidden>
+  <div id="wiz"><h3>What food do you want to replace?</h3><p class="hint">Type it below, for example "chicken pepper soup" or "beef suya under ₦650".</p></div>
+  <div class="chips" id="chips"></div>
+  <div id="log"></div>
+  <div class="row"><input id="q" placeholder="e.g. Cheap chewy swap for beef suya under ₦650, easy prep, 150 plates a week"><button class="mic" id="mic" title="Speak" onclick="listenMic()">Voice</button><button class="send" onclick="send()">Ask</button></div>
+</section>
+</div>
+<footer><span>Protifit · Plant-based menu</span><span>Prices in naira</span></footer>
+
+<script src="/cart.js"></script>
 <script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const N=n=>Number(n).toLocaleString();
+const q=$("#q"),log=$("#log"),chips=$("#chips");
+function rail(d){$("#dishes").scrollBy({left:d*320,behavior:"smooth"})}
+
+/* ---------- tabs ---------- */
+function showTab(which){
+  const swap=which==="swap";
+  $("#t-swap").setAttribute("aria-selected",swap);$("#t-ask").setAttribute("aria-selected",!swap);
+  $("#p-swap").hidden=!swap;$("#p-ask").hidden=swap;
+  try{history.replaceState(null,"",swap?location.pathname+location.search:"#consultant")}catch(e){}
+}
+$("#t-swap").onclick=()=>showTab("swap");$("#t-ask").onclick=()=>showTab("ask");
+if(location.hash==="#consultant")showTab("ask");
+
+/* ---------- swap and save (for customers) ---------- */
+let MENU=[],cur=null,filters=new Set(),sortBy="match";
+const FILTERS=[["soy","Soy-free",["soy"]],["gluten","Gluten-free",["gluten"]],["nut","Nut-free",["peanut","tree nut"]]];
+const picsHtml=(imgs,off)=>`<div class="pics">${imgs.map(u=>`<img src="${esc(u)}" alt="" loading="lazy" onerror="this.remove()">`).join("")}${off?`<span class="off">${off}% cheaper</span>`:""}</div>`;
+
+async function loadDishes(){
+  try{
+    MENU=(await (await fetch("/api/menu")).json()).items.filter(i=>i.swap_from);
+    $("#dishes").innerHTML=MENU.map(i=>`<button class="dish" data-id="${esc(i.id)}" aria-pressed="false"><div class="im"><img src="/images/${esc(i.img)}.jpg" alt="" loading="lazy" onerror="this.remove()"></div><b>${esc(i.name)}</b><small>₦${N(i.price)} with ${esc(i.protein)}</small></button>`).join("");
+    document.querySelectorAll(".dish").forEach(b=>b.onclick=()=>pickDish(b.dataset.id));
+    const want=new URLSearchParams(location.search).get("dish");
+    if(want&&MENU.some(i=>i.id===want))pickDish(want,true);
+  }catch(e){$("#dishes").innerHTML=`<div class="state" style="flex:1">We couldn't load the menu. Check your connection and <a href="" onclick="location.reload();return false">try again</a>.</div>`}
+}
+async function pickDish(id,scroll){
+  document.querySelectorAll(".dish").forEach(b=>b.setAttribute("aria-pressed",b.dataset.id===id));
+  const box=$("#swapres");box.hidden=false;box.innerHTML=`<div class="state">Finding plant-based versions…</div>`;
+  try{
+    const r=await fetch("/api/swaps/"+encodeURIComponent(id));if(!r.ok)throw 0;
+    cur=await r.json();renderSwaps();
+    if(scroll!==false)box.scrollIntoView({behavior:"smooth",block:"start"});
+  }catch(e){box.innerHTML=`<div class="state">We couldn't load the swaps for this dish. Please try again.</div>`}
+}
+function renderSwaps(){
+  const it=cur.item,box=$("#swapres");
+  let list=cur.options.filter(o=>![...filters].some(f=>FILTERS.find(x=>x[0]===f)[2].some(a=>o.allergens.includes(a))));
+  if(sortBy==="cheap")list=[...list].sort((a,b)=>a.price-b.price);
+  if(sortBy==="protein")list=[...list].sort((a,b)=>b.protein-a.protein);
+  box.innerHTML=`<h2 class="sec">2. Choose your plant-based swap</h2>
+  <div class="shead"><img src="${esc(it.image)}" alt="" onerror="this.remove()"><div><h3>${esc(it.name)}</h3><p>Usual price ₦${N(it.price)} with ${esc(it.meat)} (${cur.meat_protein_g} g protein). Every swap below is sized to <b>match the meat's protein</b>, for less.</p></div></div>
+  <div class="bar2"><div class="fl" role="group" aria-label="Allergy filters">Hide:${FILTERS.map(f=>`<button type="button" data-f="${f[0]}" aria-pressed="${filters.has(f[0])}">Contains ${f[1].replace("-free","")}</button>`).join("")}</div>
+  <label class="fl">Sort <select id="sort"><option value="match">Best match</option><option value="cheap">Cheapest first</option><option value="protein">Most protein</option></select></label></div>
+  ${list.length?`<div class="alts">${list.map(altCard).join("")}</div>`:`<div class="state">Nothing is left with those filters. Try removing one.</div>`}
+  <p class="note">Portions are sized so the protein matches the meat version. Allergens cover the recipe only: tell us about any allergy when you order. Prices are in naira.</p>`;
+  $("#sort").value=sortBy;$("#sort").onchange=e=>{sortBy=e.target.value;renderSwaps()};
+  box.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{const f=b.dataset.f;filters.has(f)?filters.delete(f):filters.add(f);renderSwaps()});
+}
+function altCard(o){
+  const al=o.allergens.length?"Contains: "+o.allergens.join(", "):"No major allergens in the recipe";
+  return `<article class="alt">${picsHtml(o.images,o.off_pct)}<div class="bd"><h3>${esc(o.title)}</h3>
+  <p class="what">${esc(o.what)}</p><p class="how">How it's cooked: ${esc(o.how)}.</p>
+  <div class="facts"><span>${o.portion_g} g cooked · matches the meat's protein</span><span>${o.protein} g protein <em>(${esc(cur.item.meat)} ${o.meat_protein} g)</em></span><span>Protein ${o.protein_off_pct}% cheaper</span></div>
+  <div class="al ${o.allergens.length?"has":""}">${esc(al)}</div>
+  <div class="buy"><div><s>₦${N(o.was)}</s><span class="p">₦${N(o.price)}</span><small>You save ₦${N(o.save)}</small></div><a class="go" href="/order?add=${encodeURIComponent(o.id)}" aria-label="Order ${esc(o.title)} version of ${esc(cur.item.name)}">Order this</a></div></div></article>`;
+}
+loadDishes();
+
+/* ---------- kitchen consultant ---------- */
 const starters=["Cheap chewy swap for beef suya under ₦650, easy prep, 150 plates a week","Shawarma swap that still tastes authentic, 200 plates a week","Tender swap for chicken pepper soup, high protein","Goat asun alternative, smoky, easy to find in Abuja markets","Suya swap for a customer with a peanut allergy"];
 chips.innerHTML=starters.map((s,i)=>`<span class="chip" onclick="send(starters[${i}])">${s.split(',')[0]}</span>`).join("");
-let state={},history=[],lastAnswer="",pickMeat=null;
-const MEATS=[["🐄","Beef","beef"],["🐐","Goat","goat"],["🐔","Chicken","chicken"],["🦃","Turkey","turkey"],["🐟","Fish","fish"],["➕","More",null],["✏️","Type it",null]];
-const OTHERS=[["🥚","Egg","egg"],["🐌","Snail","snail"],["🦐","Prawns","prawns"],["🐟","Stockfish","stockfish"],["🐄","Ponmo (cow skin)","ponmo"],["🐄","Shaki (tripe)","shaki"],["🫀","Liver","liver"],["🐔","Gizzard","gizzard"]];
-const DISHES_EGG=[["🍳","Scramble","scramble"],["🥘","Stew","stew"],["🍗","Fried","fried"],["🍲","Soup","pepper soup"]];
-const DISHES=[["🍢","Suya","suya"],["🌯","Shawarma","shawarma"],["🍲","Pepper soup","pepper soup"],["🥘","Stew","stew"],["🍗","Fried","fried"],["🍚","Jollof rice","jollof rice"]];
-const AFTER=[["💰","Cheaper","make it cheaper"],["⚡","Easier","make it easier"],["🔁","New dish",null]];
-function bigBtns(list,fn){return `<div class="big">${list.map((x,i)=>`<button onclick="${fn}(${i})"><span>${x[0]}</span>${x[1]}</button>`).join("")}</div>`}
-function wiz(step){
-  const w=document.getElementById("wiz");
-  if(step=="meat"){pickMeat=null;w.innerHTML="<h3>1. What meat do you want to replace?</h3>"+bigBtns(MEATS,"tapMeat")}
-  else if(step=="more"){w.innerHTML="<h3>Pick the one you cook</h3>"+bigBtns(OTHERS,"tapOther")+`<p><button class="listen" onclick="wiz('meat')">Back</button></p>`}
-  else if(step=="dish"){w.innerHTML=`<h3>2. How do you cook your ${esc(pickMeat[1].toLowerCase())}?</h3>`+bigBtns(pickMeat[2]=="egg"?DISHES_EGG:DISHES,"tapDish")+`<p><button class="listen" onclick="wiz('meat')">Back</button></p>`}
-  else{w.innerHTML="<h3>What next?</h3>"+bigBtns(AFTER,"tapAfter")}
-}
-function tapMeat(i){
-  if(MEATS[i][2]===null){
-    if(MEATS[i][1]=="More"){wiz("more")}
-    else{q.placeholder="Type any protein and dish, e.g. ponmo stew, egg sauce, snail, prawns";q.focus()}
-    return}
-  pickMeat=MEATS[i];wiz("dish")}
-function tapOther(i){pickMeat=OTHERS[i];wiz("dish")}
-function tapDish(i){const list=pickMeat[2]=="egg"?DISHES_EGG:DISHES;const m=pickMeat[2]+" "+list[i][2];wiz("after");send(m)}
-function tapAfter(i){if(AFTER[i][2])send(AFTER[i][2]);else wiz("meat")}
+let state={},history=[],lastAnswer="";
+
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 function listenMic(){
-  if(!SR){alert("Voice typing works in Chrome or Edge. You can still tap the pictures.");return}
+  if(!SR){alert("Voice typing works in Chrome or Edge. You can still tap the buttons.");return}
   const r=new SR(),b=document.getElementById("mic");r.lang="en-NG";r.interimResults=false;
   r.onstart=()=>b.classList.add("on");r.onend=()=>b.classList.remove("on");
   r.onresult=e=>{q.value=e.results[0][0].transcript;send()};r.onerror=()=>b.classList.remove("on");r.start();
@@ -90,19 +201,19 @@ function say(){
   const t=lastAnswer.replace(/\*\*/g,"").replace(/₦(\d[\d,]*)/g,"$1 naira").replace(/CO₂e/g,"carbon").replace(/\n+/g,". ");
   const u=new SpeechSynthesisUtterance(t);u.lang="en-NG";u.rate=.92;speechSynthesis.speak(u);
 }
-wiz("meat");
-const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
 const fmt=s=>esc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/\n/g,"<br>");
-const N=n=>Number(n).toLocaleString();
 function add(cls,html){const d=document.createElement("div");d.className="msg "+cls;d.innerHTML=`<div class="bub">${html}</div>`;log.appendChild(d);d.scrollIntoView({behavior:"smooth",block:"end"});return d}
-function card(r,i){return `<div class="rc"><h4>#${i+1} ${esc(r.name)}${r.kind=="blend"?" (blend)":""}</h4>
-<span class="b">${r.fit}% fit</span><span class="b">₦${N(r.cost)}/plate</span><span class="b">${r.protein}g protein</span>
-<div style="margin-top:4px">Texture match ${r.texture}%</div><div class="bar"><i style="width:${r.texture}%"></i></div>
-<div><b>₦${N(r.save_week)}</b>/week saved · ${r.co2_week} kg CO₂e</div>
-<div style="color:var(--mut)">${r.difficulty} · ${r.prep} min · ${r.availability} availability</div>
+function card(r,i){return `<div class="rc">${picsHtml(r.images||[])}<div class="in"><h4>#${i+1} ${esc(r.title||r.name)}${r.kind=="blend"?" (blend)":""}</h4>
+<table class="proof"><tr><th></th><th>Meat</th><th>This swap</th></tr>
+<tr><td>Cost a plate</td><td>₦${N(r.meat_cost)}</td><td><b>₦${N(r.cost)}</b></td></tr>
+<tr><td>Protein</td><td>${r.meat_protein} g</td><td><b>${r.protein} g</b></td></tr></table>
+<div class="sell">Sell at <b>₦${N(r.price)}</b> instead of ${r.price_estimated?"about ":""}₦${N(r.menu_price)} (${r.off_pct}% cheaper)</div>
+${r.price_estimated?`<div class="est">This dish isn't on your menu, so the plate price is an estimate.</div>`:""}
+<div><b>₦${N(r.save_week)}</b>/week saved</div>
 <div class="al ${r.allergens.length?"has":""}">${r.allergens.length?"Contains: "+esc(r.allergens.join(", ")):"No major allergens in the recipe"}</div>
-${r.price_confidence=="Low"?`<div class="est">Price is an estimate. Confirm with your supplier.</div>`:""}
-${r.warnings.map(w=>`<div class="warn">${esc(w)}</div>`).join("")}</div>`}
+${r.warnings.length?`<div class="warn">${esc(r.warnings[0])}</div>`:""}
+${r.price_confidence=="Low"?`<div class="est">Cost is an estimate. Confirm with your supplier.</div>`:""}
+<details><summary>How to cook it</summary><p>${esc(r.how)}.</p></details></div></div>`}
 async function send(t){
   const m=(t||q.value).trim();if(!m)return;q.value="";add("u",esc(m));
   const w=add("a","<span class='tag'>Working out the best options…</span>");
@@ -112,9 +223,11 @@ async function send(t){
     const u=r.understood?`<div class="tag">Understood: <b>${esc(r.understood.dish)}</b> · ₦${N(r.understood.budget)} cap · ${r.understood.max_difficulty} prep · ${r.understood.plates} plates/wk · priority: ${r.understood.goal}${r.understood.avoid&&r.understood.avoid.length?" · avoiding: <b>"+esc(r.understood.avoid.join(", "))+"</b>":""} · ${r.mode=="offline"?"offline engine":"AI ("+esc(r.mode)+") + data engine"}</div>`:"";
     const rel=r.recommendations[0]&&r.recommendations[0].relaxed?`<div class="warn">${esc(r.recommendations[0].relaxed)}</div>`:"";
     lastAnswer=r.answer||"";
-    w.querySelector(".bub").innerHTML=u+fmt(r.answer)+rel+`<div class="cards">${r.recommendations.map(card).join("")}</div><button class="listen" onclick="say()">Listen to this answer</button>`;
+    w.querySelector(".bub").innerHTML=u+fmt(r.answer)+rel+`<div class="cards">${r.recommendations.map(card).join("")}</div>${r.recommendations.length?`<p class="est">Costs are estimates for both the meat and the plant protein: confirm with your suppliers. Allergens cover the recipe only. Check bought-in spice mixes and keep allergen-safe prep.</p>`:""}<button class="listen" onclick="say()">Listen to this answer</button>`;
   }catch(e){w.querySelector(".bub").textContent="Could not reach the server. Is uvicorn running?"}
   w.scrollIntoView({behavior:"smooth",block:"end"});
 }
 q.addEventListener("keydown",e=>{if(e.key=="Enter")send()});
-</script></body></html>
+</script><script src="/account-nav.js" defer></script>
+<script>fetch("/api/me").then(function(r){return r.ok?r.json():null}).then(function(u){if(u&&u.avoid&&u.avoid.length){u.avoid.forEach(function(a){filters.add(a)});if(cur)renderSwaps()}}).catch(function(){});</script>
+</body></html>

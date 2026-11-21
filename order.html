@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your order | Mama Tolu Kitchen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#e8431f;--org:#f08a24;--grn:#5cbf3a;--yel:#ffd43b;--ink:#2b2622;--mut:#8a7f76;--bg:#fdf1e2;--card:#fff;--line:#f1e3d0;--leaf:#1f6b3a}
+*{box-sizing:border-box}body{margin:0;font-family:Poppins,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+h1,h2,h3{margin:0}a{color:inherit}.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+nav{position:sticky;top:0;z-index:10;background:rgba(253,241,226,.92);backdrop-filter:blur(8px)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px;gap:14px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1.15rem;color:var(--red);text-decoration:none}
+.logo i{width:30px;height:30px;border-radius:50%;background:var(--red);display:grid;place-items:center;color:#fff;font-style:normal;font-size:.9rem}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;align-items:center}
+nav ul a{text-decoration:none;font-weight:500;font-size:.85rem}nav ul a:hover{color:var(--red)}
+nav ul a.cartlink{background:#fff;color:var(--ink);padding:9px 18px;border-radius:30px;font-weight:600;box-shadow:0 4px 14px rgba(232,67,31,.12)}
+.cartlink span{display:inline-block;min-width:20px;padding:0 6px;margin-left:6px;border-radius:10px;background:var(--red);color:#fff;font-size:.75rem;text-align:center}
+.btn{display:inline-block;background:var(--red);color:#fff;text-decoration:none;padding:13px 28px;font:600 .92rem Poppins,sans-serif;border:0;border-radius:30px;cursor:pointer;width:100%;text-align:center}
+.btn:hover{background:#c9371a}.btn:disabled{background:#d9bfb6;cursor:wait}.btn.inline{width:auto}
+.btn.ghost{background:#fff;color:var(--ink);border:2px solid var(--red);padding:11px 26px}.btn.ghost:hover{background:var(--red);color:#fff}
+main{padding:20px 0 60px}h1{font-family:"Playfair Display",Georgia,serif;font-weight:400;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.12;margin:0 0 6px}
+.sub{color:var(--mut);margin:0 0 26px;font-size:.92rem}
+.cols{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start}
+.box{background:var(--card);border-radius:28px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.05)}
+.box h2{font-size:1.15rem;font-weight:600;margin:0 0 14px}
+.line{display:grid;grid-template-columns:84px 1fr auto;gap:14px;padding:14px 0;border-top:1px solid var(--line);align-items:center}
+.line:first-of-type{border-top:0;padding-top:0}
+.th{width:84px;height:64px;border-radius:16px;overflow:hidden;background:#f6e6cd;display:flex}.th img{flex:1;min-width:0;height:100%;object-fit:cover}
+.line h3{font-size:.98rem;font-weight:600}.line p{margin:2px 0 0;font-size:.8rem;color:var(--mut)}
+.tag{display:inline-block;background:var(--grn);color:#fff;font-size:.7rem;font-weight:600;padding:1px 10px;border-radius:30px;margin-bottom:3px}
+.qty{display:flex;align-items:center;margin-top:8px}
+.qty button{width:32px;height:32px;border:1px solid var(--line);background:#fff;font-size:1.1rem;cursor:pointer;border-radius:50%}
+.qty button:hover{border-color:var(--red);color:var(--red)}.qty output{width:38px;text-align:center;font-weight:600}
+.qty .rm{width:auto;padding:0 10px;margin-left:10px;border:0;background:none;color:var(--red);font-size:.8rem;text-decoration:underline;border-radius:0}
+.lt{font-weight:700;font-size:1.05rem;white-space:nowrap;color:var(--red)}
+.empty{text-align:center;padding:26px 10px}.empty p{color:var(--mut)}.empty .btn{width:auto;margin:6px 6px 0}
+.more h3{font-size:.92rem;font-weight:600}
+.mrow{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.mrow:first-of-type{border-top:0}.mrow .th{width:56px;height:46px;border-radius:50%}.mrow .mi{flex:1;min-width:0}
+.mrow small{color:var(--mut);display:block;font-size:.78rem}.mrow small a{color:var(--leaf);font-weight:600}
+.mrow .price{font-weight:600;white-space:nowrap;color:var(--ink)}
+.mrow button{border:2px solid var(--red);background:#fff;color:var(--red);border-radius:30px;padding:4px 16px;font:600 .82rem Poppins,sans-serif;cursor:pointer}
+.mrow button:hover{background:var(--red);color:#fff}
+.side{position:sticky;top:86px}
+.tot{display:flex;justify-content:space-between;font-size:1.05rem;font-weight:600;border-top:2px solid var(--line);margin-top:6px;padding-top:12px}
+.tot span:last-child{font-size:1.5rem;font-weight:700;color:var(--red)}
+.save{font-size:.85rem;color:var(--leaf);font-weight:600;margin:8px 0 0}
+label{display:block;font-weight:600;font-size:.84rem;margin:14px 0 4px}
+input[type=text],input[type=tel],textarea{width:100%;padding:12px 18px;border:1px solid var(--line);border-radius:22px;font:.95rem Poppins,sans-serif;background:#fffaf3;color:var(--ink)}
+textarea{min-height:70px;resize:vertical}
+input:focus,textarea:focus{outline:2px solid var(--red);outline-offset:0;border-color:var(--red)}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.modes label{margin:0;display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:30px;padding:10px 16px;cursor:pointer;font-weight:500;background:#fffaf3}
+.modes input{accent-color:var(--red)}.modes label:has(input:checked){border-color:var(--red);background:#fde6e0;font-weight:600}
+.hint{font-size:.78rem;color:var(--mut);margin:6px 0 0}
+.err{background:#fde6e0;border-radius:16px;color:#a02a12;padding:10px 14px;margin:14px 0 0;font-size:.88rem}
+.warn{background:#fff3d6;border-radius:16px;padding:10px 14px;margin:0 0 16px;font-size:.88rem}
+.done{max-width:620px;margin:20px auto;text-align:center;background:#fff;border-radius:36px;padding:34px 28px;box-shadow:0 10px 30px rgba(0,0,0,.05)}
+.done .ok{width:68px;height:68px;border-radius:50%;background:var(--grn);color:#fff;font-size:2rem;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.done .no{font-size:1.5rem;font-weight:700;color:var(--red);margin:6px 0 14px}
+.done ul{list-style:none;padding:0;margin:16px 0;text-align:left;border-top:1px solid var(--line)}
+.done li{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid var(--line)}
+.done .btn{width:auto;margin:6px 6px 0}
+a:focus-visible,button:focus-visible{outline:3px solid var(--yel);outline-offset:2px}
+[hidden]{display:none!important}
+@media(max-width:860px){.cols{grid-template-columns:1fr}.side{position:static}nav ul li:not(:last-child){display:none}}
+@media(max-width:480px){.line{grid-template-columns:64px 1fr}.line .th{width:64px;height:52px}.lt{grid-column:2}}
+</style></head><body>
+<nav><div class="wrap"><a class="logo" href="/"><i>M</i>Mama Tolu Kitchen</a>
+<ul><li><a href="/#menu">Menu</a></li><li><a href="/plant-based">Plant-based menu</a></li><li><a class="cartlink" href="/order">Order <span data-cart-count hidden>0</span></a></li></ul></div></nav>
+
+<main><div class="wrap" id="app">
+<div id="shop">
+<h1>Your order</h1><p class="sub">Check your basket, add your details and send it. We'll call you to confirm.</p>
+<div class="cols">
+  <div>
+    <div class="box" id="basket" aria-live="polite"><p class="sub">Loading your basket…</p></div>
+    <div class="box more" style="margin-top:20px"><h2>Add something else</h2><div id="more"></div></div>
+  </div>
+  <aside class="side"><form class="box" id="form" novalidate>
+    <h2>Your details</h2>
+    <div id="totals"></div>
+    <label for="name">Your name</label><input type="text" id="name" autocomplete="name" required>
+    <label for="phone">Phone number</label><input type="tel" id="phone" autocomplete="tel" inputmode="tel" placeholder="0803 000 0000" required>
+    <label style="margin-bottom:6px">How do you want it?</label>
+    <div class="modes"><label><input type="radio" name="mode" value="pickup" checked> Pick up</label><label><input type="radio" name="mode" value="delivery"> Delivery</label></div>
+    <div id="addr" hidden><label for="address">Delivery address</label><input type="text" id="address" autocomplete="street-address" placeholder="Street, area, landmark"><p class="hint">We confirm the delivery fee when we call you.</p></div>
+    <label for="note">Note for the kitchen (optional)</label><textarea id="note" placeholder="Less pepper, no onions…"></textarea>
+    <div class="err" id="err" role="alert" hidden></div>
+    <p style="margin:18px 0 0"><button class="btn" id="go" type="submit" disabled>Send my order</button></p>
+    <p class="hint">You pay when you collect or when it arrives.</p>
+  </form></aside>
+</div></div>
+<div class="done" id="done" hidden></div>
+</div></main>
+
+<script src="/cart.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const N=n=>"₦"+Number(n).toLocaleString("en-NG");
+const post=(u,b)=>fetch(u,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)});
+let Q={lines:[],subtotal:0}, notice="", loadFailed=false;
+
+function thumb(imgs){return `<div class="th">${(imgs||[]).map(u=>`<img src="${esc(u)}" alt="" onerror="this.remove()">`).join("")}</div>`}
+
+async function refresh(){
+  const cart=Cart.get();
+  loadFailed=false;
+  if(!cart.length){Q={lines:[],subtotal:0};render();return}
+  try{
+    const r=await post("/api/quote",{lines:cart}); if(!r.ok)throw 0;
+    Q=await r.json();
+    if(Q.unavailable.length){Q.unavailable.forEach(id=>Cart.remove(id));notice="Something in your basket is no longer on the menu, so we took it out."}
+    Q.lines.forEach(l=>{if(Cart.qty(l.id)!==l.qty)Cart.set(l.id,l.qty)});
+  }catch(e){loadFailed=true}
+  render();
+}
+function totals(){Q.subtotal=Q.lines.reduce((a,l)=>a+l.total,0)}
+function render(){
+  const b=$("#basket");
+  if(loadFailed){b.innerHTML=`<div class="empty"><p>We couldn't load your basket. Check your connection and try again.</p><button class="btn inline" onclick="refresh()">Try again</button></div>`;$("#go").disabled=true;$("#totals").innerHTML="";return}
+  if(!Q.lines.length){
+    b.innerHTML=`${notice?`<div class="warn">${esc(notice)}</div>`:""}<div class="empty"><h2>Your basket is empty</h2><p>Pick something from the menu below, or browse the full menu.</p><a class="btn inline" href="/#menu">See the menu</a><a class="btn ghost inline" href="/plant-based">Plant-based menu</a></div>`;
+    $("#go").disabled=true;$("#totals").innerHTML="";return}
+  b.innerHTML=(notice?`<div class="warn">${esc(notice)}</div>`:"")+`<h2>${Q.lines.reduce((a,l)=>a+l.qty,0)} item${Q.lines.reduce((a,l)=>a+l.qty,0)>1?"s":""}</h2>`+Q.lines.map(l=>`
+  <div class="line">${thumb(l.images)}<div>${l.plant?'<span class="tag">Plant-based</span>':""}<h3>${esc(l.name)}</h3><p>${esc(l.sub)}</p>
+  <div class="qty"><button type="button" aria-label="One less ${esc(l.name)}" onclick="chg('${esc(l.id)}',-1)">−</button><output>${l.qty}</output><button type="button" aria-label="One more ${esc(l.name)}" onclick="chg('${esc(l.id)}',1)">+</button><button type="button" class="rm" onclick="chg('${esc(l.id)}',-99)">Remove</button></div></div>
+  <div class="lt">${N(l.total)}</div></div>`).join("");
+  totals();
+  $("#totals").innerHTML=`<div class="tot"><span>Total</span><span>${N(Q.subtotal)}</span></div>`;
+  $("#go").disabled=false;
+}
+function chg(id,d){
+  const l=Q.lines.find(x=>x.id===id); if(!l)return;
+  const q=Math.max(0,Math.min(20,l.qty+d));
+  Cart.set(id,q);
+  if(q===0)Q.lines=Q.lines.filter(x=>x.id!==id);else{l.qty=q;l.total=l.price*q}
+  notice="";render();
+}
+async function addMore(id){Cart.add(id);notice="";await refresh();window.scrollTo({top:0,behavior:"smooth"})}
+
+async function loadMore(){
+  try{
+    const m=(await (await fetch("/api/menu")).json()).items;
+    $("#more").innerHTML=m.map(i=>`<div class="mrow">${thumb(["/images/"+i.img+".jpg"])}<div class="mi"><h3>${esc(i.name)}</h3><small><span class="price">${N(i.price)}</span>${i.swap_from?` · <a href="/plant-based?dish=${esc(i.id)}">plant-based from ${N(i.swap_from)}</a>`:""}</small></div><button type="button" onclick="addMore('${esc(i.id)}')" aria-label="Add ${esc(i.name)}">Add</button></div>`).join("");
+  }catch(e){$("#more").innerHTML='<p class="hint">The menu could not be loaded.</p>'}
+}
+
+document.querySelectorAll("input[name=mode]").forEach(r=>r.onchange=()=>{$("#addr").hidden=document.querySelector("input[name=mode]:checked").value!=="delivery"});
+$("#form").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const err=$("#err"),go=$("#go");err.hidden=true;
+  const body={name:$("#name").value,phone:$("#phone").value,mode:document.querySelector("input[name=mode]:checked").value,address:$("#address").value,note:$("#note").value,lines:Cart.get()};
+  const fail=m=>{err.textContent=m;err.hidden=false;err.scrollIntoView({block:"center",behavior:"smooth"})};
+  if(body.name.trim().length<2){$("#name").focus();return fail("Please tell us your name.")}
+  if(body.phone.replace(/\D/g,"").length<10){$("#phone").focus();return fail("Please enter a phone number we can call, like 0803 000 0000.")}
+  if(body.mode==="delivery"&&body.address.trim().length<6){$("#address").focus();return fail("Please add your delivery address.")}
+  go.disabled=true;go.textContent="Sending…";
+  try{
+    const r=await post("/api/orders",body), j=await r.json().catch(()=>({}));
+    if(!r.ok){go.disabled=false;go.textContent="Send my order";if(r.status===409)await refresh();return fail(typeof j.detail==="string"?j.detail:"We couldn't send your order. Please check your details and try again.")}
+    Cart.clear();showDone(j,body);
+  }catch(x){go.disabled=false;go.textContent="Send my order";fail("We couldn't reach the kitchen. Check your connection and try again. Your basket is still saved.")}
+});
+function showDone(j,b){
+  $("#shop").hidden=true;const d=$("#done");d.hidden=false;
+  d.innerHTML=`<div class="ok" aria-hidden="true">✓</div><h1>Order received</h1><div class="no">${esc(j.order_id)}</div>
+  <p>Thank you, ${esc(b.name.trim().split(" ")[0])}. We'll call <b>${esc(b.phone)}</b> to confirm${j.mode==="delivery"?" and tell you the delivery fee":""}. You pay when you ${j.mode==="delivery"?"receive it":"collect it"}.</p>
+  <ul>${j.items.map(i=>`<li><span>${i.qty} × ${esc(i.name)}</span><b>${N(i.total)}</b></li>`).join("")}<li><b>Total</b><b>${N(j.total)}</b></li></ul>
+  <a class="btn inline" href="/">Back to the menu</a><a class="btn ghost inline" href="/plant-based">Plant-based menu</a>`;
+  window.scrollTo({top:0});
+}
+
+// An "Order" button elsewhere sends us here as /order?add=<dish>: put it in the basket, then clean the address bar.
+(async()=>{
+  const add=new URLSearchParams(location.search).get("add");
+  if(add){Cart.add(add);history.replaceState(null,"","/order")}
+  loadMore();await refresh();
+})();
+</script><script src="/account-nav.js" defer></script>
+<script>fetch("/api/me").then(function(r){return r.ok?r.json():null}).then(function(u){if(!u)return;var set=function(id,v){var e=document.getElementById(id);if(e&&!e.value)e.value=v||""};set("name",u.name);set("phone",u.phone);set("address",u.address)}).catch(function(){});</script>
+</body></html>

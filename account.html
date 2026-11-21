@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sign in | Mama Tolu Kitchen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#e8431f;--org:#f08a24;--grn:#5cbf3a;--yel:#ffd43b;--ink:#2b2622;--mut:#8a7f76;--bg:#fdf1e2;--line:#f1e3d0}
+*{box-sizing:border-box}body{margin:0;font-family:Poppins,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+h1,h2,h3{margin:0}a{color:inherit}[hidden]{display:none!important}
+nav{position:sticky;top:0;z-index:10;background:rgba(253,241,226,.92);backdrop-filter:blur(8px)}
+nav .wrap{max-width:1100px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;height:72px;gap:12px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1.15rem;color:var(--red);text-decoration:none}
+.logo i{width:30px;height:30px;border-radius:50%;background:var(--red);display:grid;place-items:center;color:#fff;font-style:normal;font-size:.9rem}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;align-items:center}
+nav ul a{text-decoration:none;font-weight:500;font-size:.82rem}nav ul a:hover{color:var(--red)}
+main{max-width:520px;margin:0 auto;padding:34px 20px 70px}
+main.wide{max-width:760px}
+h1{font-family:"Playfair Display",Georgia,serif;font-weight:400;font-size:2.2rem;line-height:1.15;margin-bottom:6px}
+.sub{color:var(--mut);font-size:.9rem;margin:0 0 22px}
+.card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.05);margin-bottom:18px}
+.card h2{font-size:1.05rem;margin-bottom:12px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;background:#f6e9d6;border-radius:30px;padding:4px;margin-bottom:20px}
+.tabs button{border:0;background:none;padding:10px;border-radius:26px;font:600 .88rem Poppins,sans-serif;color:var(--mut);cursor:pointer}
+.tabs button[aria-selected=true]{background:#fff;color:var(--ink);box-shadow:0 2px 10px rgba(0,0,0,.08)}
+label{display:block;font-weight:600;font-size:.82rem;margin:14px 0 5px}
+input[type=text],input[type=tel],input[type=email],input[type=password]{width:100%;padding:12px 14px;border:1px solid #e6d6bf;border-radius:14px;font:.95rem Poppins,sans-serif;background:#fffdf9;color:var(--ink)}
+input:focus{outline:2px solid var(--red);outline-offset:0;border-color:var(--red)}
+.hint{font-size:.78rem;color:var(--mut);margin:5px 0 0}
+.btn{display:inline-block;background:var(--red);color:#fff;text-decoration:none;padding:12px 28px;font:600 .9rem Poppins,sans-serif;border:0;border-radius:30px;cursor:pointer}
+.btn:hover{background:#c9371a}.btn:disabled{background:#d9b8ae;cursor:wait}.btn.full{width:100%;margin-top:20px}
+.btn.line{background:#fff;color:var(--ink);border:2px solid var(--ink)}.btn.line:hover{background:var(--ink);color:#fff}
+.btn.danger{background:#fff;color:#b3261e;border:2px solid #b3261e}.btn.danger:hover{background:#b3261e;color:#fff}
+.err{background:#fdeceb;border-left:4px solid #b3261e;color:#8f1d17;padding:10px 12px;margin:14px 0 0;font-size:.85rem;border-radius:0 10px 10px 0}
+.ok{background:#eaf7e4;border-left:4px solid var(--grn);color:#2f6b1c;padding:10px 12px;margin:14px 0 0;font-size:.85rem;border-radius:0 10px 10px 0}
+.checks{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.checks label{margin:0;display:flex;gap:7px;align-items:center;border:1px solid #e6d6bf;border-radius:30px;padding:7px 14px;font-weight:500;cursor:pointer;background:#fffdf9}
+.checks input{accent-color:var(--red)}.checks label:has(input:checked){border-color:var(--red);background:#fdeee9;font-weight:600}
+.order{border-top:1px solid var(--line);padding:14px 0}.order:first-of-type{border-top:0;padding-top:0}
+.order .top{display:flex;justify-content:space-between;gap:10px;font-weight:600}
+.order small{color:var(--mut);display:block;font-size:.78rem}.order ul{margin:6px 0 0;padding-left:18px;font-size:.84rem}
+.st{display:inline-block;padding:2px 10px;border-radius:20px;font-size:.72rem;font-weight:600;background:#fff1d6;color:#8a5a00;text-transform:capitalize}
+.st.done,.st.ready{background:#e6f6df;color:#2f6b1c}.st.cancelled{background:#fdeceb;color:#8f1d17}
+.row2{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+a.back{display:inline-block;margin-bottom:14px;font-size:.82rem;text-decoration:none;color:var(--mut)}a.back:hover{color:var(--red)}
+button:focus-visible,a:focus-visible{outline:3px solid var(--org);outline-offset:2px}
+@media(max-width:700px){nav ul li:not(:last-child){display:none}}
+</style></head><body>
+<nav><div class="wrap"><a class="logo" href="/"><i>M</i>Mama Tolu Kitchen</a>
+<ul><li><a href="/#menu">Menu</a></li><li><a href="/plant-based">Plant-based</a></li><li><a href="/order">Order</a></li></ul></div></nav>
+
+<main id="main">
+<!-- guests see this -->
+<div id="guest" hidden>
+  <a class="back" href="/">&larr; Back to the restaurant</a>
+  <h1>Welcome</h1><p class="sub">Log in or create an account to save your details and see your past orders. You can still order without one.</p>
+  <div class="card">
+    <div class="tabs" role="tablist"><button role="tab" id="t-in" aria-selected="true">Log in</button><button role="tab" id="t-up" aria-selected="false">Sign up</button></div>
+
+    <form id="f-in" novalidate>
+      <label for="li-who">Phone number or email</label><input type="text" id="li-who" autocomplete="username" required>
+      <label for="li-pw">Password</label><input type="password" id="li-pw" autocomplete="current-password" required>
+      <div class="err" id="e-in" role="alert" hidden></div>
+      <button class="btn full" type="submit">Log in</button>
+    </form>
+
+    <form id="f-up" novalidate hidden>
+      <label for="su-name">Your name</label><input type="text" id="su-name" autocomplete="name" required>
+      <label for="su-phone">Phone number</label><input type="tel" id="su-phone" autocomplete="tel" inputmode="tel" placeholder="0803 000 0000" required>
+      <label for="su-email">Email <span style="font-weight:400;color:var(--mut)">(optional)</span></label><input type="email" id="su-email" autocomplete="email">
+      <label for="su-pw">Password</label><input type="password" id="su-pw" autocomplete="new-password" minlength="8" required>
+      <p class="hint">At least 8 characters.</p>
+      <div class="err" id="e-up" role="alert" hidden></div>
+      <button class="btn full" type="submit">Create my account</button>
+    </form>
+  </div>
+</div>
+
+<!-- logged-in customers see this -->
+<div id="me" hidden>
+  <a class="back" href="/">&larr; Back to the restaurant</a>
+  <h1 id="hi">Hi</h1><p class="sub" id="who"></p>
+  <div class="card"><h2>Your details</h2>
+    <form id="f-prof" novalidate>
+      <label for="p-name">Name</label><input type="text" id="p-name" autocomplete="name" required>
+      <label for="p-addr">Delivery address</label><input type="text" id="p-addr" autocomplete="street-address" placeholder="Street, area, landmark">
+      <label>Avoid in plant-based swaps</label>
+      <div class="checks"><label><input type="checkbox" value="soy"> Soy</label><label><input type="checkbox" value="gluten"> Gluten</label><label><input type="checkbox" value="nut"> Nuts</label></div>
+      <p class="hint">We switch these filters on for you on the plant-based menu.</p>
+      <div class="err" id="e-prof" role="alert" hidden></div><div class="ok" id="o-prof" role="status" hidden></div>
+      <div class="row2"><button class="btn" type="submit">Save</button><button class="btn line" type="button" id="logout">Log out</button></div>
+    </form>
+  </div>
+  <div class="card"><h2>Your orders</h2><div id="orders"><p class="sub" style="margin:0">Loading…</p></div></div>
+  <div class="card"><h2>Change password</h2>
+    <form id="f-pw" novalidate>
+      <label for="pw-old">Current password</label><input type="password" id="pw-old" autocomplete="current-password">
+      <label for="pw-new">New password</label><input type="password" id="pw-new" autocomplete="new-password" minlength="8">
+      <div class="err" id="e-pw" role="alert" hidden></div><div class="ok" id="o-pw" role="status" hidden></div>
+      <div class="row2"><button class="btn line" type="submit">Change password</button></div>
+    </form>
+  </div>
+  <div class="card"><h2>Delete my account</h2><p class="sub" style="margin:0 0 6px">This removes your login and saved details. Past orders stay with the kitchen.</p>
+    <form id="f-del" novalidate>
+      <label for="del-pw">Type your password to confirm</label><input type="password" id="del-pw" autocomplete="current-password">
+      <div class="err" id="e-del" role="alert" hidden></div>
+      <div class="row2"><button class="btn danger" type="submit">Delete my account</button></div>
+    </form>
+  </div>
+</div>
+</main>
+
+<script src="/cart.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const N=n=>"₦"+Number(n).toLocaleString("en-NG");
+async function api(method,url,body){
+  const r=await fetch(url,{method,headers:{"Content-Type":"application/json"},credentials:"same-origin",body:body?JSON.stringify(body):undefined});
+  let j={};try{j=await r.json()}catch(e){}
+  if(!r.ok){const d=j.detail;throw new Error(typeof d==="string"?d:Array.isArray(d)?"Please check what you typed: a name needs 2+ letters and a password 8+ characters.":"Something went wrong. Please try again.")}
+  return j;
+}
+const show=(id,msg)=>{const e=$(id);e.textContent=msg;e.hidden=!msg};
+function tab(which){const up=which==="up";
+  $("#t-in").setAttribute("aria-selected",!up);$("#t-up").setAttribute("aria-selected",up);
+  $("#f-in").hidden=up;$("#f-up").hidden=!up;try{history.replaceState(null,"",up?"#signup":location.pathname)}catch(e){}}
+$("#t-in").onclick=()=>tab("in");$("#t-up").onclick=()=>tab("up");
+
+async function start(){
+  let u=null;
+  try{u=await api("GET","/api/me")}catch(e){}
+  if(!u){$("#me").hidden=true;$("#guest").hidden=false;document.title="Log in | Mama Tolu Kitchen";if(location.hash==="#signup")tab("up");return}
+  $("#guest").hidden=true;$("#me").hidden=false;document.title="My account | Mama Tolu Kitchen";
+  $("#hi").textContent="Hi, "+u.name.split(" ")[0];
+  $("#who").textContent=[u.phone,u.email].filter(Boolean).join(" · ");
+  $("#p-name").value=u.name;$("#p-addr").value=u.address||"";
+  document.querySelectorAll(".checks input").forEach(c=>c.checked=u.avoid.includes(c.value));
+  loadOrders();
+}
+async function loadOrders(){
+  const box=$("#orders");
+  try{
+    const o=(await api("GET","/api/my-orders")).orders;
+    box.innerHTML=o.length?o.map(x=>`<div class="order"><div class="top"><span>${esc(x.order_id)} <span class="st ${esc(x.status)}">${esc(x.status)}</span></span><span>${N(x.total)}</span></div>
+      <small>${esc((x.created||"").slice(0,10))} · ${x.mode==="delivery"?"Delivery":"Pick up"}</small><ul>${(x.items||[]).map(i=>`<li>${i.qty} × ${esc(i.name)}</li>`).join("")}</ul></div>`).join("")
+      :`<p class="sub" style="margin:0">No orders yet. <a href="/#menu" style="color:var(--red)">See the menu</a></p>`;
+  }catch(e){box.innerHTML=`<p class="sub" style="margin:0">We couldn't load your orders.</p>`}
+}
+function busy(form,on,label){const b=form.querySelector("button[type=submit]");b.disabled=on;if(label)b.textContent=on?"Please wait…":label}
+
+$("#f-in").onsubmit=async e=>{e.preventDefault();show("#e-in","");
+  if(!$("#li-who").value.trim()||!$("#li-pw").value)return show("#e-in","Please enter your phone number or email, and your password.");
+  busy(e.target,true,"Log in");
+  try{await api("POST","/api/login",{who:$("#li-who").value,password:$("#li-pw").value});location.href=new URLSearchParams(location.search).get("next")==="order"?"/order":"/account"}
+  catch(x){show("#e-in",x.message);busy(e.target,false,"Log in")}};
+
+$("#f-up").onsubmit=async e=>{e.preventDefault();show("#e-up","");
+  if($("#su-name").value.trim().length<2)return show("#e-up","Please tell us your name.");
+  if($("#su-phone").value.replace(/\D/g,"").length<10)return show("#e-up","Please enter a phone number we can call, like 0803 000 0000.");
+  if($("#su-pw").value.length<8)return show("#e-up","Your password needs at least 8 characters.");
+  busy(e.target,true,"Create my account");
+  try{await api("POST","/api/register",{name:$("#su-name").value,phone:$("#su-phone").value,email:$("#su-email").value,password:$("#su-pw").value});location.href="/account"}
+  catch(x){show("#e-up",x.message);busy(e.target,false,"Create my account")}};
+
+$("#f-prof").onsubmit=async e=>{e.preventDefault();show("#e-prof","");show("#o-prof","");
+  try{await api("PUT","/api/account",{name:$("#p-name").value,address:$("#p-addr").value,avoid:[...document.querySelectorAll(".checks input:checked")].map(c=>c.value)});
+    show("#o-prof","Saved.");$("#hi").textContent="Hi, "+$("#p-name").value.trim().split(" ")[0]}
+  catch(x){show("#e-prof",x.message)}};
+
+$("#logout").onclick=async()=>{try{await api("POST","/api/logout")}catch(e){}location.href="/"};
+
+$("#f-pw").onsubmit=async e=>{e.preventDefault();show("#e-pw","");show("#o-pw","");
+  try{await api("POST","/api/account/password",{old:$("#pw-old").value,new:$("#pw-new").value});show("#o-pw","Password changed.");$("#pw-old").value=$("#pw-new").value=""}
+  catch(x){show("#e-pw",x.message)}};
+
+$("#f-del").onsubmit=async e=>{e.preventDefault();show("#e-del","");
+  if(!confirm("Delete your account? This cannot be undone."))return;
+  try{await api("POST","/api/account/delete",{password:$("#del-pw").value});location.href="/"}
+  catch(x){show("#e-del",x.message)}};
+start();
+</script></body></html>

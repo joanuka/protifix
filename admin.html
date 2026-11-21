@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Staff | Mama Tolu Kitchen</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#e8431f;--org:#f08a24;--grn:#5cbf3a;--pur:#6c5ce7;--yel:#ffd43b;--ink:#2b2622;--mut:#8a7f76;--bg:#fdf1e2;--line:#f1e3d0}
+*{box-sizing:border-box}body{margin:0;font-family:Poppins,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px 50px}[hidden]{display:none!important}
+header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+.logo{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--red)}.logo i{width:30px;height:30px;border-radius:50%;background:var(--red);display:grid;place-items:center;color:#fff;font-style:normal;font-size:.9rem}
+.box{background:#fff;border-radius:26px;padding:26px;box-shadow:0 10px 30px rgba(0,0,0,.05)}
+#login{max-width:380px;margin:60px auto}#login h1{font-size:1.4rem;margin:0 0 4px}#login p{color:var(--mut);font-size:.88rem;margin:0 0 10px}
+label{display:block;font-weight:600;font-size:.84rem;margin:14px 0 4px}
+input{width:100%;padding:12px 18px;border:1px solid var(--line);border-radius:22px;font:.95rem Poppins,sans-serif;background:#fffaf3}
+input:focus{outline:2px solid var(--red)}
+.btn{background:var(--red);color:#fff;border:0;border-radius:30px;padding:12px 26px;font:600 .88rem Poppins,sans-serif;cursor:pointer}
+.btn:hover{background:#c9371a}.btn.full{width:100%;margin-top:18px}.btn.ghost{background:#fff;color:var(--ink);box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.err{background:#fde6e0;color:#a02a12;border-radius:14px;padding:9px 14px;margin-top:12px;font-size:.86rem}
+.tabs{display:inline-flex;background:#fff;padding:5px;border-radius:40px;margin:6px 0 16px;box-shadow:0 6px 20px rgba(0,0,0,.05)}
+.tabs button{border:0;background:none;padding:9px 22px;border-radius:30px;font:600 .86rem Poppins,sans-serif;color:var(--mut);cursor:pointer}.tabs button[aria-selected=true]{background:var(--red);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}.chips button{background:#fff;border:1px solid var(--line);padding:6px 16px;border-radius:30px;font:500 .8rem Poppins,sans-serif;cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.list{display:grid;gap:16px}.o{background:#fff;border-radius:24px;padding:18px 20px;box-shadow:0 8px 22px rgba(0,0,0,.05);border-left:6px solid var(--org)}
+.o.new{border-color:var(--red)}.o.preparing{border-color:var(--org)}.o.ready{border-color:var(--pur)}.o.done{border-color:var(--grn);opacity:.8}.o.cancelled{border-color:#bbb;opacity:.6}
+.top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}.top b{font-size:1.05rem}.top small,.meta{color:var(--mut);font-size:.8rem}
+.meta{margin:4px 0 10px}.meta a{color:var(--red);font-weight:600;text-decoration:none}
+ul{margin:0 0 10px;padding:0;list-style:none;font-size:.9rem}li{display:flex;justify-content:space-between;gap:12px;padding:4px 0;border-bottom:1px dashed var(--line)}
+.note{background:#fff3d6;border-radius:12px;padding:7px 12px;font-size:.84rem;margin-bottom:10px}
+.tot{font-weight:700;color:var(--red);font-size:1.1rem}.st{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.st button{border:1px solid var(--line);background:#fff;border-radius:30px;padding:5px 14px;font:500 .78rem Poppins,sans-serif;cursor:pointer}.st button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.fb .stars{color:#f5a623;letter-spacing:2px}.fb p{margin:4px 0 8px;overflow-wrap:anywhere}.fb button{color:var(--red);background:none;border:0;cursor:pointer;font:600 .8rem Poppins,sans-serif}
+.empty{background:#fff;border:1px dashed #e6cfae;border-radius:22px;padding:28px;text-align:center;color:var(--mut)}
+.banner{background:var(--grn);color:#fff;border-radius:16px;padding:10px 16px;margin-bottom:14px;font-weight:600;font-size:.9rem}
+button:focus-visible{outline:3px solid var(--yel);outline-offset:2px}
+</style></head><body><div class="wrap">
+<div id="login" class="box" hidden><div class="logo" style="margin-bottom:14px"><i>M</i>Mama Tolu Kitchen</div><h1>Staff login</h1><p>Only the restaurant team can sign in here.</p>
+<form id="lf"><label for="u">Username</label><input id="u" autocomplete="username"><label for="p">Password</label><input id="p" type="password" autocomplete="current-password">
+<div class="err" id="le" hidden role="alert"></div><button class="btn full" type="submit">Log in</button></form></div>
+<div id="app" hidden><header><div class="logo"><i>M</i>Mama Tolu Kitchen · Staff</div><div><span id="who" style="color:var(--mut);font-size:.84rem;margin-right:10px"></span><button class="btn ghost" id="out">Log out</button></div></header>
+<div class="tabs" role="tablist"><button id="t-o" role="tab" aria-selected="true">Orders</button><button id="t-f" role="tab" aria-selected="false">Feedback</button></div>
+<div id="banner" class="banner" hidden></div>
+<section id="p-o"><div class="chips" id="chips"></div><div class="list" id="orders"></div></section>
+<section id="p-f" hidden><div class="list" id="fb"></div></section></div></div>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const N=n=>"₦"+Number(n).toLocaleString("en-NG");
+const STAT=["new","preparing","ready","done","cancelled"],LABEL={new:"New",preparing:"Preparing",ready:"Ready",done:"Done",cancelled:"Cancelled"};
+let ORD=[],filter="active",seen=null,timer=null;
+async function api(u,o){const r=await fetch(u,Object.assign({headers:{"Content-Type":"application/json"}},o||{}));if(r.status===401){showLogin();throw new Error("auth")}return r}
+function showLogin(){clearInterval(timer);$("#app").hidden=true;$("#login").hidden=false}
+async function start(user){$("#login").hidden=true;$("#app").hidden=false;$("#who").textContent=user||"";await loadOrders();timer=setInterval(()=>{loadOrders();if(!$("#p-f").hidden)loadFb()},15000)}
+(async()=>{try{const r=await fetch("/admin/api/me");if(r.ok)start((await r.json()).user);else showLogin()}catch(e){showLogin()}})();
+$("#lf").onsubmit=async e=>{e.preventDefault();const er=$("#le");er.hidden=true;
+  try{const r=await fetch("/admin/api/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:$("#u").value,password:$("#p").value})});
+    const j=await r.json().catch(()=>({}));if(!r.ok){er.textContent=typeof j.detail==="string"?j.detail:"Could not log in.";er.hidden=false;return}
+    $("#p").value="";start($("#u").value)}catch(x){er.textContent="Could not reach the server.";er.hidden=false}};
+$("#out").onclick=async()=>{await fetch("/admin/api/logout",{method:"POST"});seen=null;showLogin()};
+function tab(t){const o=t==="o";$("#t-o").setAttribute("aria-selected",o);$("#t-f").setAttribute("aria-selected",!o);$("#p-o").hidden=!o;$("#p-f").hidden=o;if(!o)loadFb()}
+$("#t-o").onclick=()=>tab("o");$("#t-f").onclick=()=>tab("f");
+function beep(){try{const a=new(window.AudioContext||window.webkitAudioContext)(),o=a.createOscillator();o.connect(a.destination);o.frequency.value=880;o.start();setTimeout(()=>{o.stop();a.close()},250)}catch(e){}}
+async function loadOrders(){try{ORD=(await (await api("/admin/api/orders")).json()).orders;
+  const ids=new Set(ORD.map(o=>o.order_id));
+  if(seen){const fresh=ORD.filter(o=>!seen.has(o.order_id));if(fresh.length){beep();const b=$("#banner");b.textContent=fresh.length+" new order"+(fresh.length>1?"s":"")+"!";b.hidden=false;setTimeout(()=>b.hidden=true,8000)}}
+  seen=ids;const n=ORD.filter(o=>o.status==="new").length;document.title=(n?"("+n+") ":"")+"Staff | Mama Tolu Kitchen";renderOrders()}catch(e){}}
+function renderOrders(){
+  const f=[["active","Active"],["new","New"],["done","Done"],["all","All"]];
+  $("#chips").innerHTML=f.map(x=>`<button data-f="${x[0]}" aria-pressed="${filter===x[0]}">${x[1]}</button>`).join("");
+  $("#chips").querySelectorAll("button").forEach(b=>b.onclick=()=>{filter=b.dataset.f;renderOrders()});
+  const list=ORD.filter(o=>filter==="all"||(filter==="active"?["new","preparing","ready"].includes(o.status):o.status===filter));
+  $("#orders").innerHTML=list.length?list.map(o=>`<article class="o ${esc(o.status)}"><div class="top"><b>${esc(o.order_id)} · ${esc(o.name)}</b><small>${esc(new Date(o.created).toLocaleString())}</small></div>
+  <div class="meta"><a href="tel:${esc(o.phone)}">${esc(o.phone)}</a> · ${o.mode==="delivery"?"Delivery to "+esc(o.address):"Pick up"}</div>
+  <ul>${o.items.map(i=>`<li><span>${i.qty} × ${esc(i.name)}</span><span>${N(i.total)}</span></li>`).join("")}</ul>
+  ${o.note?`<div class="note">Note: ${esc(o.note)}</div>`:""}<div class="tot">Total ${N(o.total)}</div>
+  <div class="st">${STAT.map(s=>`<button class="${o.status===s?"on":""}" data-id="${esc(o.order_id)}" data-s="${s}">${LABEL[s]}</button>`).join("")}</div></article>`).join(""):`<div class="empty">No orders here yet.</div>`;
+  $("#orders").querySelectorAll(".st button").forEach(b=>b.onclick=async()=>{try{await api("/admin/api/orders/"+encodeURIComponent(b.dataset.id)+"/status",{method:"POST",body:JSON.stringify({status:b.dataset.s})});loadOrders()}catch(e){}})}
+async function loadFb(){try{const it=(await (await api("/admin/api/feedback")).json()).items;
+  $("#fb").innerHTML=it.length?it.map(i=>`<article class="o fb"><div class="top"><b>${esc(i.name)}${i.dish?" · "+esc(i.dish):""}</b><span class="stars">${"★".repeat(i.rating)}${"☆".repeat(5-i.rating)}</span></div><p>${esc(i.comment)}</p><button data-id="${i.id}">Delete</button></article>`).join(""):`<div class="empty">No feedback yet.</div>`;
+  $("#fb").querySelectorAll("button").forEach(b=>b.onclick=async()=>{if(!confirm("Delete this feedback?"))return;try{await api("/admin/api/feedback/"+b.dataset.id,{method:"DELETE"});loadFb()}catch(e){}})}catch(e){}}
+</script></body></html>
