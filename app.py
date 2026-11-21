@@ -13,7 +13,7 @@ from make_alt_images import SLUGS, render as draw_alt  # names + one-line descri
 
 BASE_DIR = pathlib.Path(__file__).resolve().parent  # all files are found relative to app.py, so the server can start from any folder
 
-app = FastAPI(title="Mama Tolu Menu Consultant")
+app = FastAPI(title="Protifix Menu Consultant")
 app.add_middleware(CORSMiddleware, allow_origins=[o for o in os.getenv("ALLOWED_ORIGINS", "").split(",") if o],
                    allow_methods=["GET", "POST", "DELETE"], allow_headers=["Content-Type"])
 app.include_router(feedback_router)
@@ -721,7 +721,7 @@ def menu_brief():
 
 
 CONVO_SYSTEM = (
-    "You are the AI assistant of Mama Tolu Kitchen, a Nigerian restaurant in Abuja. Chat like a warm, friendly server: "
+    "You are the AI assistant of Protifix, a Nigerian restaurant in Abuja. Chat like a warm, friendly server: "
     "greet back, handle small talk, and answer questions about the menu, plant-based swaps, protein, allergens and cooking. "
     "For a greeting or small talk, reply warmly in one short sentence and ask what they need. "
     "NEVER list dishes, prices or the menu unless the customer asks about the menu or names a specific food. "

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sign in | Mama Tolu Kitchen</title>
+<title>Sign in | Protifix</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -45,7 +45,7 @@ a.back{display:inline-block;margin-bottom:14px;font-size:.82rem;text-decoration:
 button:focus-visible,a:focus-visible{outline:3px solid var(--org);outline-offset:2px}
 @media(max-width:700px){nav ul li:not(:last-child){display:none}}
 </style></head><body>
-<nav><div class="wrap"><a class="logo" href="/"><i>M</i>Mama Tolu Kitchen</a>
+<nav><div class="wrap"><a class="logo" href="/"><i>P</i>Protifix</a>
 <ul><li><a href="/#menu">Menu</a></li><li><a href="/plant-based">Plant-based</a></li><li><a href="/order">Order</a></li></ul></div></nav>
 
 <main id="main">
@@ -129,8 +129,8 @@ $("#t-in").onclick=()=>tab("in");$("#t-up").onclick=()=>tab("up");
 async function start(){
   let u=null;
   try{u=await api("GET","/api/me")}catch(e){}
-  if(!u){$("#me").hidden=true;$("#guest").hidden=false;document.title="Log in | Mama Tolu Kitchen";if(location.hash==="#signup")tab("up");return}
-  $("#guest").hidden=true;$("#me").hidden=false;document.title="My account | Mama Tolu Kitchen";
+  if(!u){$("#me").hidden=true;$("#guest").hidden=false;document.title="Log in | Protifix";if(location.hash==="#signup")tab("up");return}
+  $("#guest").hidden=true;$("#me").hidden=false;document.title="My account | Protifix";
   $("#hi").textContent="Hi, "+u.name.split(" ")[0];
   $("#who").textContent=[u.phone,u.email].filter(Boolean).join(" · ");
   $("#p-name").value=u.name;$("#p-addr").value=u.address||"";

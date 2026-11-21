@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Staff | Mama Tolu Kitchen</title>
+<title>Staff | Protifix</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--red:#e8431f;--org:#f08a24;--grn:#5cbf3a;--pur:#6c5ce7;--yel:#ffd43b;--ink:#2b2622;--mut:#8a7f76;--bg:#fdf1e2;--line:#f1e3d0}
@@ -34,10 +34,10 @@ ul{margin:0 0 10px;padding:0;list-style:none;font-size:.9rem}li{display:flex;jus
 .banner{background:var(--grn);color:#fff;border-radius:16px;padding:10px 16px;margin-bottom:14px;font-weight:600;font-size:.9rem}
 button:focus-visible{outline:3px solid var(--yel);outline-offset:2px}
 </style></head><body><div class="wrap">
-<div id="login" class="box" hidden><div class="logo" style="margin-bottom:14px"><i>M</i>Mama Tolu Kitchen</div><h1>Staff login</h1><p>Only the restaurant team can sign in here.</p>
+<div id="login" class="box" hidden><div class="logo" style="margin-bottom:14px"><i>P</i>Protifix</div><h1>Staff login</h1><p>Only the restaurant team can sign in here.</p>
 <form id="lf"><label for="u">Username</label><input id="u" autocomplete="username"><label for="p">Password</label><input id="p" type="password" autocomplete="current-password">
 <div class="err" id="le" hidden role="alert"></div><button class="btn full" type="submit">Log in</button></form></div>
-<div id="app" hidden><header><div class="logo"><i>M</i>Mama Tolu Kitchen · Staff</div><div><span id="who" style="color:var(--mut);font-size:.84rem;margin-right:10px"></span><button class="btn ghost" id="out">Log out</button></div></header>
+<div id="app" hidden><header><div class="logo"><i>P</i>Protifix · Staff</div><div><span id="who" style="color:var(--mut);font-size:.84rem;margin-right:10px"></span><button class="btn ghost" id="out">Log out</button></div></header>
 <div class="tabs" role="tablist"><button id="t-o" role="tab" aria-selected="true">Orders</button><button id="t-f" role="tab" aria-selected="false">Feedback</button></div>
 <div id="banner" class="banner" hidden></div>
 <section id="p-o"><div class="chips" id="chips"></div><div class="list" id="orders"></div></section>
@@ -63,7 +63,7 @@ function beep(){try{const a=new(window.AudioContext||window.webkitAudioContext)(
 async function loadOrders(){try{ORD=(await (await api("/admin/api/orders")).json()).orders;
   const ids=new Set(ORD.map(o=>o.order_id));
   if(seen){const fresh=ORD.filter(o=>!seen.has(o.order_id));if(fresh.length){beep();const b=$("#banner");b.textContent=fresh.length+" new order"+(fresh.length>1?"s":"")+"!";b.hidden=false;setTimeout(()=>b.hidden=true,8000)}}
-  seen=ids;const n=ORD.filter(o=>o.status==="new").length;document.title=(n?"("+n+") ":"")+"Staff | Mama Tolu Kitchen";renderOrders()}catch(e){}}
+  seen=ids;const n=ORD.filter(o=>o.status==="new").length;document.title=(n?"("+n+") ":"")+"Staff | Protifix";renderOrders()}catch(e){}}
 function renderOrders(){
   const f=[["active","Active"],["new","New"],["done","Done"],["all","All"]];
   $("#chips").innerHTML=f.map(x=>`<button data-f="${x[0]}" aria-pressed="${filter===x[0]}">${x[1]}</button>`).join("");

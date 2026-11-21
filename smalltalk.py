@@ -22,14 +22,14 @@ import random, re
 _G = r"(hi+|hello+|hey+|good (morning|afternoon|evening)|how far|how you dey|sannu|ina kwana|bawo|e kaaro|nnoo|kedu|what'?s up|sup)"
 _PIDGIN = re.compile(r"\b(how far|how you dey|how body|wetin dey)\b")
 
-GREET = ["Hi! 👋 I'm the Mama Tolu assistant. What can I get for you today?",
-         "Hello! 😊 I'm the Mama Tolu assistant. How can I help you today?",
-         "Hey there! I'm the Mama Tolu assistant. What can I do for you?"]
-GREET_PIDGIN = ["Hey! 👋 I be Mama Tolu assistant. Wetin I fit do for you today?",
-                "How far! 😊 I be Mama Tolu assistant. Wetin you wan chop?"]
+GREET = ["Hi! 👋 I'm the Protifix assistant. What can I get for you today?",
+         "Hello! 😊 I'm the Protifix assistant. How can I help you today?",
+         "Hey there! I'm the Protifix assistant. What can I do for you?"]
+GREET_PIDGIN = ["Hey! 👋 I be Protifix assistant. Wetin I fit do for you today?",
+                "How far! 😊 I be Protifix assistant. Wetin you wan chop?"]
 HOW_ARE_YOU = ["I'm doing great, thanks for asking! 😊 How about you? What can I get for you today?",
                "All good here, thank you! 😊 How are you? What can I help you with?"]
-WHO_AM_I = ("I'm the Mama Tolu assistant. I can answer questions about our menu and help you find "
+WHO_AM_I = ("I'm the Protifix assistant. I can answer questions about our menu and help you find "
             "cheaper plant-based swaps that keep the same protein. Tell me what you're craving, or how much you'd like to spend.")
 
 # short ways people write words
